@@ -75,7 +75,7 @@ const HeroVideoSection = () => {
           {/* Animated Subtitle */}
           <div className="relative mb-8">
             <p className="text-xl md:text-3xl text-white/90 font-light tracking-wide">
-              Premium Dry Fruits Delivered to You
+              Premium Dry Fruits Delivered To You
             </p>
             <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-32 h-1 bg-gradient-to-r from-transparent via-orange-500 to-transparent rounded-full animate-pulse" />
           </div>
