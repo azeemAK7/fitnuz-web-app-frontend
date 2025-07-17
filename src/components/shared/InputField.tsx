@@ -41,7 +41,7 @@ const InputField: React.FC<InputFieldProps> = ({
           placeholder={placeholder}
           className={`${
             className ? className : ""
-          }}w-full pl-2 pr-9 py-2 border outline-none bg-transparent text-slate-800 rounded-md ${
+          }w-full pl-2 pr-9 py-2 border outline-none bg-transparent text-slate-800 rounded-md ${
             errors[id]?.message ? "border-red-500" : "border-slate-700"
           }`}
           {...register(id, {
