@@ -186,24 +186,27 @@ const Contact = () => {
                     </div>
 
                     <div className="flex items-center p-4 bg-gray-800/10 rounded-2xl hover:bg-gray-800/20 transition-all duration-300 transform hover:translate-x-2 border border-slate-500/10">
-                      <div className="w-12 h-12 bg-gradient-to-r from-slate-500 to-gray-500 rounded-full flex items-center justify-center mr-4 shadow-lg">
-                        <FaEnvelope className="text-white text-lg" />
+                      <div className="w-12  h-12 bg-gradient-to-r from-gray-600 to-slate-600 rounded-full flex items-center justify-center mr-4 shadow-lg px-4">
+                        <FaMapMarkedAlt className="text-white text-lg" />
                       </div>
-                      <div>
+                      <div className="flex-1 break-all">
                         <p className="text-gray-300 text-sm">Email Orders</p>
-                        <p className="text-white font-semibold">
-                          xxx@gmail.com
+                        <p className="text-white font-semibold sm:text-md text-sm">
+                          abdulkhaderazeem7666gmail.com
                         </p>
                       </div>
                     </div>
 
-                    <div className="flex items-center p-4 bg-gray-800/10 rounded-2xl hover:bg-gray-800/20 transition-all duration-300 transform hover:translate-x-2 border border-slate-500/10">
-                      <div className="w-12  h-12 bg-gradient-to-r from-gray-600 to-slate-600 rounded-full flex items-center justify-center mr-4 shadow-lg">
+                    <div className="flex items-center py-4 pl-4 bg-gray-800/10 rounded-2xl hover:bg-gray-800/20 transition-all duration-300 transform hover:translate-x-2 border border-slate-500/10">
+                      <div className="w-12 h-12 bg-gradient-to-r from-gray-600 to-slate-600 rounded-full flex items-center justify-center mr-4 shadow-lg px-4">
                         <FaMapMarkedAlt className="text-white text-lg" />
                       </div>
-                      <div>
+                      <div className="flex-1 break-words">
                         <p className="text-gray-300 text-sm">Store Location</p>
-                        <p className="text-white font-semibold">xxxx</p>
+                        <p className="text-white font-semibold sm:text-md sm:text-md text-sm">
+                          Mm Traders, Model Colony, Dr.Ambedkar Nagar,
+                          Yeswanthpur, Bangalore
+                        </p>
                       </div>
                     </div>
                   </div>

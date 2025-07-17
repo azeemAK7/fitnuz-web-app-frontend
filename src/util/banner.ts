@@ -13,9 +13,10 @@ export const bannerList = [
   {
     id: 2,
     image: slider2anime,
-    title: "Royal Treat",
-    subtitle: "Whole Cashews",
-    description: "Creamy, crunchy, and perfect for every snack time",
+    title: "Nutty Delight",
+    subtitle: "Fun with Dry Fruits!",
+    description:
+      "Wholesome joy in every bite almonds, walnuts & more for growing champs!",
   },
   {
     id: 3,
