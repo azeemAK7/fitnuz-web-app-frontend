@@ -67,12 +67,14 @@ const AddressList: React.FC<AddressListProps> = ({
 
               <div className="flex items-center">
                 <FaStreetView size={16} className="mr-2 text-gray-600" />
-                <p className="break-words max-w-[250px]">{address.street}</p>
+                <p className="max-w-[110px] sm:max-w-[160px] text-sm text-slate-800 break-words">
+                  {address.street}
+                </p>
               </div>
 
               <div className="flex items-center">
                 <FaCity size={16} className="mr-2 text-gray-600" />
-                <p className="break-words max-w-[250px]">
+                <p className="break-words">
                   {address.city}, {address.state}
                 </p>
               </div>

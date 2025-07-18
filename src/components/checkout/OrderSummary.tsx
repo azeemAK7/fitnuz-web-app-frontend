@@ -23,7 +23,7 @@ const OrderSummary = () => {
                 <strong>City: </strong>
                 {userSelectedCheckoutAddress?.city}
               </p>
-              <p>
+              <p className="break-words">
                 <strong>Street: </strong>
                 {userSelectedCheckoutAddress?.street}
               </p>
