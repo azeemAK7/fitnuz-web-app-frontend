@@ -229,7 +229,7 @@ export const addOrUpdateUserAddress =
 export const fetchUserAddress = () => async (dispatch: AppDispatch) => {
   try {
     dispatch({ type: "IS_FETCHING" });
-    const { data } = await api.get("/addresses");
+    const { data } = await api.get("/user/addresses");
     dispatch({
       type: "FETCH_ADDRESS",
       payload: data,
