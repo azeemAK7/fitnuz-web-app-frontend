@@ -68,7 +68,7 @@ const ProductCard = ({
         ></img>
       </div>
 
-      <div className="pt-4 px-4 flex flex-col flex-1">
+      <div className="pt-4 px-4 flex flex-col flex-1 mb-2">
         <h2
           onClick={() => {
             handleProductView({
