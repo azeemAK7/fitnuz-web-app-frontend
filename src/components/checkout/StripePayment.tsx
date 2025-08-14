@@ -12,12 +12,25 @@ const StripePayment = () => {
   const { clientSecret } = useAppSelector((state) => state.auth);
   const { totalPrice } = useAppSelector((state) => state.carts);
   const { isLoading } = useAppSelector((state) => state.errors);
+  const { user, userSelectedCheckoutAddress } = useAppSelector(
+    (state) => state.auth
+  );
 
   const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
   useEffect(() => {
     if (!clientSecret) {
-      dispatch(createClientSecret(totalPrice));
+      const customerData = {
+        amount: Number(totalPrice) * 100,
+        currency: "INR",
+        email: user?.email ?? "",
+        name: user?.userName ?? "",
+        address: userSelectedCheckoutAddress ?? undefined,
+        description: `Order for ${user?.email}`,
+        metadata: { test: "1" },
+      };
+
+      dispatch(createClientSecret(customerData));
     }
   }, [clientSecret]);
 

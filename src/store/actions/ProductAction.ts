@@ -7,6 +7,7 @@ import type {
   ProductType,
   ResetForm,
   SetLoader,
+  StripeCustomer,
   stripeData,
   ToastType,
 } from "../../types/common";
@@ -317,15 +318,15 @@ export const getcartItems =
   };
 
 export const createClientSecret =
-  (totalPrice: number) => async (dispatch: AppDispatch) => {
+  (customerData: StripeCustomer) => async (dispatch: AppDispatch) => {
     try {
       dispatch({
         type: "IS_FETCHING",
       });
-      const { data } = await api.post("/order/stripe-client-secret", {
-        amount: Number(totalPrice) * 100,
-        currency: "INR",
-      });
+      const { data } = await api.post(
+        "/order/stripe-client-secret",
+        customerData
+      );
 
       dispatch({
         type: "SET_CLIENT_SECRET",

@@ -84,6 +84,16 @@ export interface stripeData {
   pgStatus: string;
 }
 
+export interface StripeCustomer {
+  amount: number;
+  currency: string;
+  email: string;
+  name: string;
+  address?: AddressType;
+  description?: string;
+  metadata?: { [key: string]: string };
+}
+
 export interface ProductCardProps extends ProductType {
   about?: boolean;
 }
