@@ -68,7 +68,7 @@ const ProductCard = ({
         ></img>
       </div>
 
-      <div className="pt-4 px-4 flex flex-col flex-grow">
+      <div className="pt-4 px-4 flex flex-col flex-1">
         <h2
           onClick={() => {
             handleProductView({
@@ -94,7 +94,7 @@ const ProductCard = ({
         </div>
 
         {!about && (
-          <div className="flex items-center justify-between mt-auto pb-1">
+          <div className="flex items-center justify-between mt-auto pb-2">
             {specialPrice != productPrice ? (
               <div className="flex flex-col">
                 <span className="text-gray-400 line-through">
