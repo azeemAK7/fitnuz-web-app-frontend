@@ -38,7 +38,7 @@ const ProductCard = ({
   };
 
   return (
-    <div className=" scale-90 border border-gray-900 rounded-lg shadow-xl overflow-hidden transition-shadow duration-300">
+    <div className=" scale-90 border border-gray-900 rounded-lg shadow-xl overflow-hidden transition-shadow duration-300 flex flex-col relative">
       {discount > 0 && (
         <div className="absolute top-2 left-2 z-10 bg-gradient-to-r from-red-500 to-pink-500 text-white px-3 py-1 rounded-full text-sm font-bold shadow-lg flex items-center gap-1">
           <FaTag size={12} />
@@ -68,7 +68,7 @@ const ProductCard = ({
         ></img>
       </div>
 
-      <div className="pt-4 px-4">
+      <div className="pt-4 px-4 flex flex-col flex-grow">
         <h2
           onClick={() => {
             handleProductView({
@@ -94,7 +94,7 @@ const ProductCard = ({
         </div>
 
         {!about && (
-          <div className="flex items-center justify-between mt-4 pb-1">
+          <div className="flex items-center justify-between mt-auto pb-1">
             {specialPrice != productPrice ? (
               <div className="flex flex-col">
                 <span className="text-gray-400 line-through">
