@@ -95,7 +95,7 @@ const ProductCard = ({
 
         {!about && (
           <div className="flex items-center justify-between mt-4 pb-1">
-            {specialPrice ? (
+            {specialPrice != productPrice ? (
               <div className="flex flex-col">
                 <span className="text-gray-400 line-through">
                   ₹{Number(productPrice).toFixed(2)}
