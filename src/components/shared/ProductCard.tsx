@@ -68,7 +68,7 @@ const ProductCard = ({
         ></img>
       </div>
 
-      <div className="pt-4 px-4 flex flex-col flex-1 mb-2">
+      <div className="pt-4 px-4 flex flex-col flex-1">
         <h2
           onClick={() => {
             handleProductView({
@@ -88,7 +88,7 @@ const ProductCard = ({
         </h2>
 
         <div className="flex-grow">
-          <p className="text-gray-600 text-sm">
+          <p className="text-gray-600 text-sm mb-2">
             {truncate(productDiscription, 90)}
           </p>
         </div>
