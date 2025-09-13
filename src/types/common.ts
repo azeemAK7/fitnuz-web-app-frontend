@@ -16,6 +16,13 @@ export interface StatusProps {
   color: string;
 }
 
+export interface DashboardOverviewProps {
+  title: string;
+  amount: string | number;
+  Icon: IconType;
+  revenue?: boolean;
+}
+
 export interface AddressType {
   addressId?: number;
   buildingName: string;

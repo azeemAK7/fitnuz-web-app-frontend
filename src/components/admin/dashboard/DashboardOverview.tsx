@@ -1,6 +1,12 @@
+import type { DashboardOverviewProps } from "../../../types/common";
 import { formatRevenue } from "../../../util/formatPrice";
 
-const DashboardOverview = ({ title, amount, Icon, revenue = false }) => {
+const DashboardOverview = ({
+  title,
+  amount,
+  Icon,
+  revenue = false,
+}: DashboardOverviewProps) => {
   const convertedAmount = revenue ? Number(amount).toFixed(2) : amount;
   return (
     <>

@@ -2,11 +2,26 @@ import type {
   FetchAdminProductsAction,
   FetchAnalyticsAction,
 } from "../../types/actionTypes";
+import type {
+  AnalyticsType,
+  PaginationType,
+  ProductType,
+} from "../../types/common";
 
-const initialState = {
-  analytics: {},
+interface AdminState {
+  analytics: AnalyticsType;
+  adminProducts: ProductType[];
+  adminProductsPagination: PaginationType | null;
+}
+
+const initialState: AdminState = {
+  analytics: {
+    totalProducts: "0",
+    totalOrders: "0",
+    totalRevenue: "0",
+  },
   adminProducts: [],
-  adminProductsPagination: {},
+  adminProductsPagination: null,
 };
 
 type AdminAction = FetchAnalyticsAction | FetchAdminProductsAction;

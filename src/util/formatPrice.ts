@@ -8,13 +8,14 @@ export const formatPrice = (amount: number | null | undefined): string => {
   }).format(amount);
 };
 
-export const formatRevenue = (value: number) => {
-  if (value >= 1e9) {
-    return (value / 1e9).toFixed(1) + "B";
-  } else if (value >= 1e6) {
-    return (value / 1e6).toFixed(1) + "M";
-  } else if (value >= 1e3) {
-    return (value / 1e3).toFixed(1) + "K";
+export const formatRevenue = (value: number | string) => {
+  const num = typeof value === "string" ? Number(value) : value;
+  if (num >= 1e9) {
+    return (num / 1e9).toFixed(1) + "B";
+  } else if (num >= 1e6) {
+    return (num / 1e6).toFixed(1) + "M";
+  } else if (num >= 1e3) {
+    return (num / 1e3).toFixed(1) + "K";
   } else {
     return value;
   }
