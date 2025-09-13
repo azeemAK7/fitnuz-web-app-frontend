@@ -22,7 +22,7 @@ function ProductViewModel({
   product,
   isAvailable,
 }: ProductViewModelProps) {
-  const { productName, image, productDiscription, productPrice, specialPrice } =
+  const { productName, image, productDescription, productPrice, specialPrice } =
     { ...product };
 
   return (
@@ -92,7 +92,7 @@ function ProductViewModel({
                     )}
                   </div>
                   <Divider />
-                  <p>{productDiscription}</p>
+                  <p>{productDescription}</p>
                 </div>
               </div>
 

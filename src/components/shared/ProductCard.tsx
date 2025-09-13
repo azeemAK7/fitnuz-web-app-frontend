@@ -12,7 +12,7 @@ const ProductCard = ({
   productId,
   productName,
   image,
-  productDiscription,
+  productDescription,
   productQuantity,
   productPrice,
   discount,
@@ -52,7 +52,7 @@ const ProductCard = ({
             productId,
             productName,
             image,
-            productDiscription,
+            productDescription,
             productQuantity,
             productPrice,
             discount,
@@ -75,7 +75,7 @@ const ProductCard = ({
               productId,
               productName,
               image,
-              productDiscription,
+              productDescription,
               productQuantity,
               productPrice,
               discount,
@@ -89,7 +89,7 @@ const ProductCard = ({
 
         <div className="flex-grow">
           <p className="text-gray-600 text-sm mb-2">
-            {truncate(productDiscription, 90)}
+            {truncate(productDescription, 90)}
           </p>
         </div>
 

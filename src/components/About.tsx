@@ -117,7 +117,7 @@ const About = () => {
               key={index}
               image={product.image}
               productName={product.productName}
-              productDiscription={product.description}
+              productDescription={product.description}
               specialPrice={product.specialPrice}
               productPrice={product.price}
               about

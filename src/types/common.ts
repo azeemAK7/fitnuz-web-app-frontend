@@ -36,7 +36,7 @@ export interface User {
 export interface CartItemType {
   productId: number;
   productName: string;
-  productDiscription: string;
+  productDescription: string;
   productCategory: string;
   productPrice: number;
   specialPrice: number;
@@ -54,7 +54,7 @@ export interface ProductType {
   productId: number;
   productName: string;
   image: string;
-  productDiscription: string;
+  productDescription: string;
   productQuantity: number;
   productPrice: number;
   discount: number;
