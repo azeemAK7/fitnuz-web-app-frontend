@@ -13,7 +13,7 @@ const ProductCard = ({
   productName,
   image,
   productDescription,
-  productQuantity,
+  productStock,
   productPrice,
   discount,
   specialPrice,
@@ -23,7 +23,7 @@ const ProductCard = ({
   const btnLoader = false;
   const [selectedViewProduct, setSelectedViewProduct] =
     useState<ProductType | null>(null);
-  const isAvailable = !!(productQuantity && Number(productQuantity) > 0);
+  const isAvailable = !!(productStock && Number(productStock) > 0);
   const dispatch = useAppDispatch();
 
   const handleProductView = (product: ProductType) => {
@@ -53,7 +53,7 @@ const ProductCard = ({
             productName,
             image,
             productDescription,
-            productQuantity,
+            productStock,
             productPrice,
             discount,
             specialPrice,
@@ -76,7 +76,7 @@ const ProductCard = ({
               productName,
               image,
               productDescription,
-              productQuantity,
+              productStock,
               productPrice,
               discount,
               specialPrice,

@@ -74,13 +74,13 @@ export const addToCart =
       (item: ProductType) => item.productId === cartProductId
     );
 
-    const currentQty = existingCartItem?.productQuantity || 0;
+    const currentQty = existingCartItem?.productStock || 0;
     const totalQty = currentQty + qty;
 
-    if (product.productQuantity >= totalQty) {
+    if (product.productStock >= totalQty) {
       dispatch({
         type: "ADD_CART",
-        payload: { ...product, productQuantity: totalQty },
+        payload: { ...product, productStock: totalQty },
       });
       toast.success(`${product.productName} added to cart`);
       //localStorage.setItem("cartItem", JSON.stringify(getState().carts.cart));
@@ -107,11 +107,11 @@ export const increaseCartQty =
     }
 
     const newQty = currentQuantity + 1;
-    if (product.productQuantity >= newQty) {
+    if (product.productStock >= newQty) {
       setCurrentQuantity(newQty);
       dispatch({
         type: "ADD_CART",
-        payload: { ...product, productQuantity: newQty },
+        payload: { ...product, productStock: newQty },
       });
     } else {
       toast.error("Oops! You've reached the maximum available stock.");
@@ -128,7 +128,7 @@ export const decreaseCartQty =
 
     dispatch({
       type: "ADD_CART",
-      payload: { ...product, productQuantity: newQty },
+      payload: { ...product, productStock: newQty },
     });
   };
 

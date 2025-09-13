@@ -10,7 +10,7 @@ const Cart = () => {
   const { cart } = useAppSelector((state) => state.carts);
   const totalPrice = cart.reduce(
     (acc: number, cur: CartItemType) =>
-      acc + Number(cur?.specialPrice) * Number(cur?.productQuantity),
+      acc + Number(cur?.specialPrice) * Number(cur?.productStock),
     0
   );
   if (!cart || cart.length === 0) return <CartEmpty />;

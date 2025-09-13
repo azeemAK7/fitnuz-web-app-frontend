@@ -41,13 +41,13 @@ export interface CartItemType {
   productPrice: number;
   specialPrice: number;
   discount: number;
-  productQuantity: number;
+  productStock: number;
   image: string;
 }
 
 export interface CartItemUpdate {
   productId: number;
-  productQuantity: number;
+  productStock: number;
 }
 
 export interface ProductType {
@@ -55,7 +55,7 @@ export interface ProductType {
   productName: string;
   image: string;
   productDescription: string;
-  productQuantity: number;
+  productStock: number;
   productPrice: number;
   discount: number;
   specialPrice: number;

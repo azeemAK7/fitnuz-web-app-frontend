@@ -61,9 +61,9 @@ const OrderSummary = () => {
                     <div className="text-gray-500">
                       <p>{item?.productName}</p>
                       <p>
-                        {item?.productQuantity} x ₹{item?.specialPrice} = ₹
+                        {item?.productStock} x ₹{item?.specialPrice} = ₹
                         {formatPriceCalculation(
-                          item?.productQuantity,
+                          item?.productStock,
                           item?.specialPrice
                         )}
                       </p>
