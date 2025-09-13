@@ -5,6 +5,7 @@ import { cartReducer } from "./CartReducer";
 import { authReducer } from "./AuthReducer";
 import { paymentReducer } from "./PaymentReducer";
 import type { CartItemType } from "../../types/common";
+import { AdminReducer } from "./AdminReducer";
 
 // 1. Combine reducers
 const rootReducer = combineReducers({
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   errors: errorReducer,
   carts: cartReducer,
   payment: paymentReducer,
+  admin: AdminReducer,
 });
 
 // 2. Export RootState (based on rootReducer, NOT store)

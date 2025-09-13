@@ -120,3 +120,9 @@ export type NavigateFunction = (path: string) => void;
 
 export type SetLoader = (isLoading: boolean) => void;
 export type ResetForm = () => void;
+
+export interface AnalyticsType {
+  totalProducts: string;
+  totalOrders: string;
+  totalRevenue: string;
+}

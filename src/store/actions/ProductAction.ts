@@ -382,3 +382,22 @@ export const resetClientSecret = () => {
     type: "RESET_CLIENT_SECRET",
   };
 };
+
+export const getAnalytics = () => async (dispatch: AppDispatch) => {
+  try {
+    dispatch({
+      type: "IS_FETCHING",
+    });
+    const { data } = await api.get("/admin/app/analytics");
+    dispatch({
+      type: "FETCH_ANALYTICS",
+      payload: data,
+    });
+    dispatch({ type: "IS_SUCCESS" });
+  } catch (error) {
+    dispatch({
+      type: "IS_ERROR",
+      payload: getErrorMessage(error),
+    });
+  }
+};

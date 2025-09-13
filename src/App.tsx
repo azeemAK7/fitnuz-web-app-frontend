@@ -17,6 +17,8 @@ import Register from "./components/auth/Register";
 import Checkout from "./components/checkout/Checkout";
 import HeroVideoSection from "./components/home/HeroVideoSection";
 import OrderConfirmation from "./components/checkout/OrderConfirmation";
+import Dashboard from "./components/admin/dashboard/Dashboard";
+import AdminLayout from "./components/admin/AdminLayout";
 
 function AppWrapper() {
   const location = useLocation();
@@ -43,6 +45,12 @@ function AppWrapper() {
         <Route element={<PrivateRoute />}>
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/order-confirm" element={<OrderConfirmation />} />
+        </Route>
+
+        <Route element={<PrivateRoute adminOnly />}>
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route path="" element={<Dashboard />} />
+          </Route>
         </Route>
       </Routes>
       <Toaster position="top-center" />

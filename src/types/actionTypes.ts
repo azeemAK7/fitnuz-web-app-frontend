@@ -1,4 +1,10 @@
-import type { AddressType, CategoryType, ProductType, User } from "./common";
+import type {
+  AddressType,
+  AnalyticsType,
+  CategoryType,
+  ProductType,
+  User,
+} from "./common";
 
 export interface AuthState {
   user: User | null;
@@ -49,3 +55,18 @@ export type ErrorAction =
 export type paymentAction =
   | { type: "ADD_PAYMENT_METHOD"; payload: string }
   | { type: "RESET_PAYMENT_METHOD" };
+
+export interface FetchAnalyticsAction {
+  type: "FETCH_ANALYTICS";
+  payload: AnalyticsType; // replace `any` with proper type, e.g., `Analytics`
+}
+
+export interface FetchAdminProductsAction {
+  type: "FETCH_ADMIN_PRODUCTS";
+  payload: ProductType[]; // replace with Product[]
+  pageSize: number;
+  pageNumber: number;
+  totalElements: number;
+  totalPages: number;
+  isLastPage: boolean;
+}

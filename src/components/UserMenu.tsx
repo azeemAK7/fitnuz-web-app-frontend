@@ -8,6 +8,7 @@ import BackDrop from "./BackDrop";
 import toast from "react-hot-toast";
 import { logoutUser } from "../store/actions/ProductAction";
 import { useAppDispatch, useAppSelector } from "../hooks/storeHooks";
+import { MdAdminPanelSettings } from "react-icons/md";
 
 const UserMenu = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -16,6 +17,8 @@ const UserMenu = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.auth);
+
+  const isAdmin = user && user?.userRoles?.includes("ROLE_ADMIN");
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -55,6 +58,15 @@ const UserMenu = () => {
             <span className="font-bold text-[16px] mt-1">{user?.userName}</span>
           </MenuItem>
         </Link>
+
+        {isAdmin && (
+          <Link to="/admin">
+            <MenuItem className="flex gap-2" onClick={handleClose}>
+              <MdAdminPanelSettings className="text-xl" />
+              <span className="font-bold text-[14px] mt-1">Dashboard</span>
+            </MenuItem>
+          </Link>
+        )}
 
         <Link to="/profile/orders">
           <MenuItem className="flex gap-2" onClick={handleClose}>
