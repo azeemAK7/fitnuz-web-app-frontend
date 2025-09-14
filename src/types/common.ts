@@ -123,6 +123,14 @@ export type ToastType = {
   error: (msg: string) => void;
 };
 
+export interface OrderRow {
+  id: number;
+  email: string;
+  totalAmount: number;
+  status: string;
+  date: string;
+}
+
 export type NavigateFunction = (path: string) => void;
 
 export type SetLoader = (isLoading: boolean) => void;
@@ -132,4 +140,31 @@ export interface AnalyticsType {
   totalProducts: string;
   totalOrders: string;
   totalRevenue: string;
+}
+
+export interface Order {
+  orderId: number;
+  email: string;
+  orderItems: OrderItem[];
+  orderDate: string;
+  payment: Payment;
+  totalAmount: number;
+  orderStatus: string;
+  address: string;
+}
+export interface OrderItem {
+  orderItemId: number;
+  product: ProductType;
+  quantity: number;
+  discount: number;
+  orderedProductPrice: number;
+}
+
+interface Payment {
+  paymentId: number;
+  paymentMethod: string;
+  pgPaymentId: string;
+  pgStatus: string;
+  pgResponseMessage: string;
+  pgName: string;
 }

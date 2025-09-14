@@ -19,6 +19,7 @@ import HeroVideoSection from "./components/home/HeroVideoSection";
 import OrderConfirmation from "./components/checkout/OrderConfirmation";
 import Dashboard from "./components/admin/dashboard/Dashboard";
 import AdminLayout from "./components/admin/AdminLayout";
+import Orders from "./components/admin/orders/Orders";
 
 function AppWrapper() {
   const location = useLocation();
@@ -50,6 +51,7 @@ function AppWrapper() {
         <Route element={<PrivateRoute adminOnly />}>
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="" element={<Dashboard />} />
+            <Route path="orders" element={<Orders />} />
           </Route>
         </Route>
       </Routes>

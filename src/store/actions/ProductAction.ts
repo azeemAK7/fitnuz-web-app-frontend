@@ -1,3 +1,4 @@
+import type { AxiosError } from "axios";
 import api from "../../api/api";
 import type {
   AddressType,
@@ -401,3 +402,52 @@ export const getAnalytics = () => async (dispatch: AppDispatch) => {
     });
   }
 };
+
+export const fetchDashboardOrders =
+  (queryString: string) => async (dispatch: AppDispatch) => {
+    try {
+      dispatch({ type: "IS_FETCHING" });
+      const { data } = await api.get(`/admin/orders?${queryString}`);
+
+      dispatch({
+        type: "FETCH_ORDERS",
+        payload: data.content,
+        pageSize: data.pageSize,
+        pageNumber: data.pageNumber,
+        totalElements: data.totalElements,
+        totalPages: data.totalPages,
+        isLastPage: data.isLastPage,
+      });
+      dispatch({ type: "IS_SUCCESS" });
+    } catch (error) {
+      dispatch({
+        type: "IS_ERROR",
+        payload: getErrorMessage(error),
+      });
+    }
+  };
+
+export const updateOrderStatus =
+  (
+    orderId: number,
+    setOpen: (open: boolean) => void,
+    orderStatus: string,
+    toast: ToastType
+  ) =>
+  async (dispatch: AppDispatch) => {
+    try {
+      dispatch({ type: "BTN_LOADER" });
+      const { data } = await api.put(`/admin/orders/${orderId}/status`, {
+        status: orderStatus,
+      });
+      toast.success(data || "Success");
+      dispatch({ type: "IS_SUCCESS" });
+      await dispatch(fetchDashboardOrders(""));
+    } catch (err) {
+      const error = err as AxiosError<{ message: string }>;
+      toast.error(error.response?.data?.message || "Internal Server Error");
+      dispatch({ type: "IS_ERROR" });
+    } finally {
+      setOpen(false);
+    }
+  };

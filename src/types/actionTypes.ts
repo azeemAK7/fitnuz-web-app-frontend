@@ -2,6 +2,7 @@ import type {
   AddressType,
   AnalyticsType,
   CategoryType,
+  Order,
   ProductType,
   User,
 } from "./common";
@@ -64,6 +65,16 @@ export interface FetchAnalyticsAction {
 export interface FetchAdminProductsAction {
   type: "FETCH_ADMIN_PRODUCTS";
   payload: ProductType[]; // replace with Product[]
+  pageSize: number;
+  pageNumber: number;
+  totalElements: number;
+  totalPages: number;
+  isLastPage: boolean;
+}
+
+export interface FetchOrdersAction {
+  type: "FETCH_ORDERS";
+  payload: Order[];
   pageSize: number;
   pageNumber: number;
   totalElements: number;

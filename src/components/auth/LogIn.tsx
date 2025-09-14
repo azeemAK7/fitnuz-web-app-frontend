@@ -24,7 +24,6 @@ const LogIn = () => {
   });
 
   const loginHandler: SubmitHandler<LoginFormValues> = async (data) => {
-    console.log(data);
     dispatch(authenticateSignInUser(data, navigate, toast, setLoader, reset));
   };
 
