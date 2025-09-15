@@ -1,5 +1,9 @@
 import type { GridColDef } from "@mui/x-data-grid";
-import type { AdminProductRow, OrderRow } from "../../types/common";
+import type {
+  AdminCategoryRow,
+  AdminProductRow,
+  OrderRow,
+} from "../../types/common";
 import { FaEye, FaImage } from "react-icons/fa6";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 
@@ -268,6 +272,73 @@ export const adminProductTableColumn = (
           >
             <FaEye className="mr-2" />
             View
+          </button>
+        </div>
+      );
+    },
+  },
+];
+
+export const adminCategoryTableColumn = (
+  handleEdit: (row: AdminCategoryRow) => void,
+  handleDelete: (row: AdminCategoryRow) => void
+): GridColDef<AdminCategoryRow>[] => [
+  {
+    sortable: false,
+    disableColumnMenu: true,
+    field: "id",
+    headerName: "Category Id",
+    align: "center",
+    minWidth: 180,
+    headerAlign: "center",
+    editable: false,
+    headerClassName: "text-black font-semibold border",
+    cellClassName: "text-slate-700 font-normal border border-slate-300",
+    renderHeader: () => <span className="text-center">Category ID</span>,
+  },
+  {
+    disableColumnMenu: true,
+    field: "categoryName",
+    headerName: "Category Name",
+    align: "center",
+    width: 200,
+    editable: false,
+    sortable: true,
+    headerAlign: "center",
+    headerClassName: "text-black font-semibold text-center border ",
+    cellClassName:
+      "text-slate-700 font-normal border text-center border-slate-300",
+    renderHeader: () => <span>Category Name</span>,
+  },
+  {
+    // Custom action column with an "Edit" button.
+    field: "action",
+    headerName: "Action",
+    headerAlign: "center",
+    editable: false,
+    headerClassName: "text-black font-semibold text-center",
+    cellClassName: "text-slate-700 font-normal border border-slate-300",
+    sortable: false,
+    flex: 1, // take remaining space dynamically
+    minWidth: 200,
+    renderHeader: () => <span>Action</span>,
+    renderCell: (params) => {
+      return (
+        <div className="flex justify-center items-center space-x-2 h-full pt-2">
+          <button
+            onClick={() => handleEdit(params.row)}
+            className="flex items-center bg-blue-500 text-white px-4 h-9 rounded-md "
+          >
+            <FaEdit className="mr-2" />
+            Edit
+          </button>
+
+          <button
+            onClick={() => handleDelete(params.row)}
+            className="flex items-center bg-red-500 text-white px-4   h-9 rounded-md"
+          >
+            <FaTrashAlt className="mr-2" />
+            Delete
           </button>
         </div>
       );

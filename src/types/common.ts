@@ -78,6 +78,10 @@ export type ProductFormValues = {
   specialPrice?: number;
   discount: number;
 };
+export type CategoryFormValues = {
+  categoryId?: number;
+  categoryName: string;
+};
 
 export interface CartState {
   cart: CartItemType[];
@@ -151,6 +155,11 @@ export interface AdminProductRow {
   productPrice: number;
   specialPrice: number;
   discount: number;
+}
+
+export interface AdminCategoryRow {
+  id: number;
+  categoryName: string;
 }
 
 export type NavigateFunction = (path: string) => void;

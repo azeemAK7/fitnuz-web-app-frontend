@@ -5,6 +5,7 @@ import type {
   AdminProductRow,
   CartItemType,
   CartItemUpdate,
+  CategoryFormValues,
   NavigateFunction,
   ProductFormValues,
   ProductType,
@@ -607,6 +608,83 @@ export const fetchAdminCategories =
         isLastPage: data.isLastPage,
       });
       dispatch({ type: "CATEGORY_SUCCESS" });
+    } catch (error) {
+      dispatch({
+        type: "IS_ERROR",
+        payload: getErrorMessage(error),
+      });
+    }
+  };
+
+export const adminCategoryAdd =
+  (
+    sendData: CategoryFormValues,
+    toast: ToastType,
+    reset: ResetForm,
+    setOpen: (open: boolean) => void
+  ) =>
+  async (dispatch: AppDispatch) => {
+    try {
+      dispatch({
+        type: "BTN_LOADER",
+      });
+      await api.post(`/admin/categories`, sendData);
+
+      toast.success("category added successfully");
+      dispatch({ type: "IS_SUCCESS" });
+      setOpen(false);
+      reset();
+      await dispatch(fetchAdminCategories());
+    } catch (error) {
+      dispatch({
+        type: "IS_ERROR",
+        payload: getErrorMessage(error),
+      });
+    }
+  };
+
+export const adminCategoryUpdate =
+  (
+    sendData: CategoryFormValues,
+    toast: ToastType,
+    reset: ResetForm,
+    setOpen: (open: boolean) => void
+  ) =>
+  async (dispatch: AppDispatch) => {
+    try {
+      dispatch({
+        type: "BTN_LOADER",
+      });
+      await api.put(`/admin/categories/${sendData.categoryId}`, sendData);
+      toast.success("Category Updated");
+      dispatch({ type: "IS_SUCCESS" });
+      reset();
+      setOpen(false);
+      await dispatch(fetchAdminCategories());
+    } catch (error) {
+      dispatch({
+        type: "IS_ERROR",
+        payload: getErrorMessage(error),
+      });
+    }
+  };
+
+export const adminCategoryDelete =
+  (
+    toast: ToastType,
+    setOpenDeleteModal: (open: boolean) => void,
+    categoryId?: number
+  ) =>
+  async (dispatch: AppDispatch) => {
+    try {
+      dispatch({
+        type: "BTN_LOADER",
+      });
+      const { data } = await api.delete(`/admin/categories/${categoryId}`);
+      toast.success(data || "Category Deleted successfully");
+      dispatch({ type: "IS_SUCCESS" });
+      setOpenDeleteModal(false);
+      await dispatch(fetchAdminCategories());
     } catch (error) {
       dispatch({
         type: "IS_ERROR",
