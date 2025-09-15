@@ -13,6 +13,7 @@ import {
 import toast from "react-hot-toast";
 import { useAppDispatch, useAppSelector } from "../../hooks/storeHooks";
 import type { AddressType } from "../../types/common";
+import Loader from "../shared/Loader";
 
 interface AddressInfoProps {
   addresses: AddressType[];
@@ -47,7 +48,9 @@ const AddressInfo = ({ addresses }: AddressInfoProps) => {
 
   return (
     <div className="pt-4">
-      {noAddressExist ? (
+      {isLoading ? (
+        <Loader text="Loading Address..." />
+      ) : noAddressExist ? (
         <div className="p-6 rounded-lg max-w-md mx-auto flex flex-col items-center justify-center">
           <FaAddressBook size={48} className="text-gray-500 mb-4" />
           <h1 className="mb-2 text-slate-900 text-center font-semibold text-2xl">
