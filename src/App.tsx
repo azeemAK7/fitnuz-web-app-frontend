@@ -20,6 +20,7 @@ import OrderConfirmation from "./components/checkout/OrderConfirmation";
 import Dashboard from "./components/admin/dashboard/Dashboard";
 import AdminLayout from "./components/admin/AdminLayout";
 import Orders from "./components/admin/orders/Orders";
+import AdminProducts from "./components/admin/products/AdminProducts";
 
 function AppWrapper() {
   const location = useLocation();
@@ -52,6 +53,7 @@ function AppWrapper() {
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="" element={<Dashboard />} />
             <Route path="orders" element={<Orders />} />
+            <Route path="products" element={<AdminProducts />} />
           </Route>
         </Route>
       </Routes>
