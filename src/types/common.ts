@@ -59,6 +59,7 @@ export interface CartItemUpdate {
 
 export interface ProductType {
   productId: number;
+  productCategory?: string;
   productName: string;
   image: string;
   productDescription: string;
@@ -67,6 +68,16 @@ export interface ProductType {
   discount: number;
   specialPrice: number;
 }
+
+export type ProductFormValues = {
+  productId?: number;
+  productName: string;
+  productDescription: string;
+  productPrice: number;
+  productStock: number;
+  specialPrice?: number;
+  discount: number;
+};
 
 export interface CartState {
   cart: CartItemType[];
@@ -129,6 +140,17 @@ export interface OrderRow {
   totalAmount: number;
   status: string;
   date: string;
+}
+
+export interface AdminProductRow {
+  id: number;
+  category?: string;
+  productName: string;
+  description: string;
+  productStock: number;
+  productPrice: number;
+  specialPrice: number;
+  discount: number;
 }
 
 export type NavigateFunction = (path: string) => void;

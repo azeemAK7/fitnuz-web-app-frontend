@@ -109,6 +109,7 @@ const AddressInfo = ({ addresses }: AddressInfoProps) => {
         setOpenDeleteModal={setOpenDeleteModal}
         onDeleteHandler={onDeleteHandler}
         btnLoader={btnLoader}
+        text="Address"
       />
     </div>
   );

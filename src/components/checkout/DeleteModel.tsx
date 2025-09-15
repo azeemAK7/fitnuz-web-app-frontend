@@ -12,6 +12,7 @@ interface DeleteModalProps {
   setOpenDeleteModal: (open: boolean) => void;
   onDeleteHandler: () => void;
   btnLoader: boolean;
+  text: string;
 }
 
 export const DeleteModal = ({

@@ -72,6 +72,16 @@ export interface FetchAdminProductsAction {
   isLastPage: boolean;
 }
 
+export interface FetchAdminCategoryAction {
+  type: "FETCH_ADMIN_CATEGORY";
+  payload: CategoryType[]; // replace with Product[]
+  pageSize: number;
+  pageNumber: number;
+  totalElements: number;
+  totalPages: number;
+  isLastPage: boolean;
+}
+
 export interface FetchOrdersAction {
   type: "FETCH_ORDERS";
   payload: Order[];

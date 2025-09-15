@@ -2,9 +2,11 @@ import type { AxiosError } from "axios";
 import api from "../../api/api";
 import type {
   AddressType,
+  AdminProductRow,
   CartItemType,
   CartItemUpdate,
   NavigateFunction,
+  ProductFormValues,
   ProductType,
   ResetForm,
   SetLoader,
@@ -449,5 +451,166 @@ export const updateOrderStatus =
       dispatch({ type: "IS_ERROR" });
     } finally {
       setOpen(false);
+    }
+  };
+
+export const fetchAdminProducts =
+  (queryString: string = "") =>
+  async (dispatch: AppDispatch) => {
+    try {
+      dispatch({ type: "IS_FETCHING" });
+      const { data } = await api.get(`/admin/products?${queryString}`);
+      dispatch({
+        type: "FETCH_ADMIN_PRODUCTS",
+        payload: data.content,
+        pageSize: data.pageSize,
+        pageNumber: data.pageNumber,
+        totalElements: data.totalElements,
+        totalPages: data.totalPages,
+        isLastPage: data.isLastPage,
+      });
+      dispatch({ type: "IS_SUCCESS" });
+    } catch (error) {
+      dispatch({
+        type: "IS_ERROR",
+        payload: getErrorMessage(error),
+      });
+    }
+  };
+
+export const updateProductDetails =
+  (
+    sendData: ProductFormValues,
+    toast: ToastType,
+    setOpen: (open: boolean) => void,
+    reset: ResetForm
+  ) =>
+  async (dispatch: AppDispatch) => {
+    try {
+      dispatch({ type: "BTN_LOADER" });
+      await api.put(`/admin/products/${sendData.productId}`, sendData);
+      toast.success("Product Updated");
+      dispatch({ type: "IS_SUCCESS" });
+      reset();
+      setOpen(false);
+      await dispatch(fetchAdminProducts());
+    } catch (error) {
+      dispatch({ type: "IS_ERROR" });
+      toast.error(
+        getFieldErrors(error, [
+          "productName",
+          "productDescription",
+          "productPrice",
+          "productStock",
+          "specialPrice",
+          "discount",
+          "message",
+        ])
+      );
+    }
+  };
+
+export const addNewProduct =
+  (
+    sendData: ProductFormValues,
+    toast: ToastType,
+    setOpen: (open: boolean) => void,
+    reset: ResetForm,
+    categoryId?: number
+  ) =>
+  async (dispatch: AppDispatch) => {
+    try {
+      dispatch({ type: "BTN_LOADER" });
+      await api.post(`/admin/categories/${categoryId}/products`, sendData);
+      toast.success("Product Added");
+      dispatch({ type: "IS_SUCCESS" });
+      reset();
+      setOpen(false);
+      await dispatch(fetchAdminProducts());
+    } catch (error) {
+      dispatch({ type: "IS_ERROR" });
+      toast.error(
+        getFieldErrors(error, [
+          "productName",
+          "productDescription",
+          "productPrice",
+          "productStock",
+          "specialPrice",
+          "discount",
+          "message",
+        ])
+      );
+    }
+  };
+
+export const adminDeleteProduct =
+  (
+    toast: ToastType,
+    setDeleteDialogOpen: (open: boolean) => void,
+    setSelectedProduct: (product: AdminProductRow | null) => void,
+    productId?: number
+  ) =>
+  async (dispatch: AppDispatch) => {
+    try {
+      dispatch({ type: "BTN_LOADER" });
+      await api.delete(`/admin/products/${productId}`);
+      dispatch({ type: "IS_SUCCESS" });
+      setSelectedProduct(null);
+      toast.success("product deleted successfully");
+      await dispatch(fetchAdminProducts());
+    } catch (error) {
+      dispatch({
+        type: "IS_ERROR",
+        payload: getErrorMessage(error),
+      });
+    } finally {
+      setDeleteDialogOpen(false);
+    }
+  };
+
+export const updateProductImage =
+  (
+    toast: ToastType,
+    setOpen: (open: boolean) => void,
+    productId: number,
+    formData: FormData
+  ) =>
+  async (dispatch: AppDispatch) => {
+    try {
+      dispatch({ type: "BTN_LOADER" });
+      await api.put(`/admin/products/${productId}/image`, formData);
+      dispatch({ type: "IS_SUCCESS" });
+      toast.success("product image updated successfully");
+      setOpen(false);
+      await dispatch(fetchAdminProducts());
+    } catch (error) {
+      dispatch({
+        type: "IS_ERROR",
+        payload: getErrorMessage(error),
+      });
+    }
+  };
+
+export const fetchAdminCategories =
+  (queryString: string = "") =>
+  async (dispatch: AppDispatch) => {
+    try {
+      dispatch({ type: "CATEGORY_FETCHING" });
+      const { data } = await api.get(`admin/categories?${queryString}`);
+      dispatch({
+        type: "FETCH_ADMIN_CATEGORY",
+        payload: data.content,
+        pageSize: data.pageSize,
+        pageNumber: data.pageNumber,
+        totalElements: data.totalElements,
+        totalPages: data.totalPages,
+        isLastPage: data.isLastPage,
+      });
+      dispatch({ type: "CATEGORY_SUCCESS" });
+    } catch (error) {
+      dispatch({
+        type: "IS_ERROR",
+        payload: getErrorMessage(error),
+      });
     }
   };
