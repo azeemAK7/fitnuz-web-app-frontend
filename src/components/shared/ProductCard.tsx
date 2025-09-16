@@ -82,10 +82,12 @@ const ProductCard = ({
               specialPrice,
             });
           }}
-          className="mb-2 font-semibold text-lg cursor-pointer"
+          className="font-semibold text-lg cursor-pointer"
         >
           {truncate(productName, 20)}
         </h2>
+
+        <p className="text-sm text-gray-500 mb-1 font-mono">1kg pack</p>
 
         <div className="flex-grow">
           <p className="text-gray-600 text-sm mb-2">
