@@ -44,7 +44,7 @@ function ProductViewModel({
             >
               <div className="flex justify-center aspect-[3/2]">
                 <img
-                  className="w-full h-full cursor-pointer transition-transform duration-300 transform hover:scale-105 rounded-lg object-cover"
+                  className="w-full h-full cursor-pointer transition-transform duration-300 transform hover:scale-105 rounded-2xl object-cover"
                   src={image}
                   alt={productName}
                 ></img>
