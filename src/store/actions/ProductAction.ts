@@ -5,6 +5,7 @@ import type {
   AdminProductRow,
   CartItemType,
   CartItemUpdate,
+  CashOnDeliveryData,
   CategoryFormValues,
   NavigateFunction,
   ProductFormValues,
@@ -371,6 +372,34 @@ export const stripePaymentConfirmation =
       setErrorMesssage("Payment Failed. Please try again.");
     } finally {
       setLoadng(false);
+    }
+  };
+
+export const cashOnDeliveryConfirmation =
+  (
+    sendData: CashOnDeliveryData,
+    setLoading: (open: boolean) => void,
+    toast: ToastType,
+    navigate: NavigateFunction
+  ) =>
+  async (dispatch: AppDispatch) => {
+    try {
+      setLoading(true);
+      const response = await api.post("/order/users/payments/online", sendData);
+      if (response.data) {
+        localStorage.removeItem("cartItems");
+        localStorage.removeItem("client-secret");
+        dispatch({ type: "RESET_CHECKOUT_ADDRESS" });
+        dispatch({ type: "CLEAR_CART" });
+        toast.success("Order Accepted");
+        navigate("/order-confirm");
+      } else {
+        toast.error("Payment Failed. Please try again.");
+      }
+    } catch {
+      toast.error("Payment Failed. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 

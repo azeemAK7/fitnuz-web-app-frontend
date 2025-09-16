@@ -58,6 +58,12 @@ const PaymentMethod = () => {
             label="RazorPay"
             className="text-gray-700"
           />
+          <FormControlLabel
+            value="Cash on Delivery"
+            control={<Radio color="primary" />}
+            label="Cash on Delivery"
+            className="text-gray-700"
+          />
         </RadioGroup>
       </FormControl>
     </div>

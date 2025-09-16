@@ -105,6 +105,13 @@ export interface stripeData {
   pgResponseMessage: string;
   pgStatus: string;
 }
+export interface CashOnDeliveryData {
+  addressId: number;
+  pgName: string;
+  pgPaymentId: string;
+  pgResponseMessage: string;
+  pgStatus: string;
+}
 
 export interface StripeCustomer {
   amount: number;
@@ -144,6 +151,7 @@ export interface OrderRow {
   totalAmount: number;
   status: string;
   date: string;
+  pgStatus: string;
 }
 
 export interface AdminProductRow {

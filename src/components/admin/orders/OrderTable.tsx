@@ -24,6 +24,7 @@ const OrderTable = ({ adminOrders, pagination }: OrderTableProps) => {
       totalAmount: data.totalAmount,
       status: data.orderStatus,
       date: data.orderDate,
+      pgStatus: data.payment.pgStatus,
     };
   });
 

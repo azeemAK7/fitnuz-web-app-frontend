@@ -27,6 +27,8 @@ const PaymentForm = ({ clientSecret, totalPrice }: PaymentFormProps) => {
 
     await elements.submit();
 
+    localStorage.setItem("payment", "offline");
+
     const { error } = await stripe.confirmPayment({
       elements,
       clientSecret,

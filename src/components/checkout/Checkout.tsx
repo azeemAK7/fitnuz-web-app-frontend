@@ -10,6 +10,7 @@ import OrderSummary from "./OrderSummary";
 import StripePayment from "./StripePayment";
 import RazorpayPayment from "./RazorpayPayment";
 import { useAppDispatch, useAppSelector } from "../../hooks/storeHooks";
+import CashOnDelivery from "./CashOnDelivery";
 
 const Checkout = () => {
   const [activeStep, setActiveStep] = useState(0);
@@ -68,8 +69,10 @@ const Checkout = () => {
             <>
               {paymentMethod === "Stripe" ? (
                 <StripePayment />
-              ) : (
+              ) : paymentMethod === "RazorPay" ? (
                 <RazorpayPayment />
+              ) : (
+                <CashOnDelivery />
               )}
             </>
           )}

@@ -83,6 +83,21 @@ export const adminOrderTableColumn = (
     renderHeader: () => <span>Order Date</span>,
   },
   {
+    // Column for order creation date.
+    disableColumnMenu: true,
+    field: "pgStatus",
+    headerName: "Payment Status",
+    align: "center",
+    width: 200,
+    editable: false,
+    sortable: false,
+    headerAlign: "center",
+    headerClassName: "text-black font-semibold text-center border ",
+    cellClassName:
+      "text-slate-700 font-normal border text-center border-slate-300",
+    renderHeader: () => <span>Payment Status</span>,
+  },
+  {
     // Custom action column with an "Edit" button.
     field: "action",
     headerName: "Action",
