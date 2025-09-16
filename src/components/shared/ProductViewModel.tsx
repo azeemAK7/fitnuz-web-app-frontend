@@ -44,7 +44,7 @@ function ProductViewModel({
             >
               <div className="flex justify-center aspect-[3/2]">
                 <img
-                  className="w-full h-full cursor-pointer transition-transform duration-300 transform hover:scale-105 rounded-xl object-cover"
+                  className="w-full h-full cursor-pointer transition-transform duration-300 transform hover:scale-105 rounded-lg object-cover"
                   src={image}
                   alt={productName}
                 ></img>
@@ -57,6 +57,7 @@ function ProductViewModel({
                 >
                   {productName}
                 </DialogTitle>
+                <p className="text-sm text-gray-500 mb-1 font-mono">1kg pack</p>
 
                 <div className="space-y-2 text-gray-700 pb-4">
                   <div className="flex items-center justify-between gap-2">
