@@ -122,7 +122,15 @@ const UserOrder = () => {
                   </p>
                   <p>
                     <strong>Payment: </strong>
-                    {order.payment.pgStatus}
+                    <span
+                      className={`${
+                        order.payment.pgStatus === "Pending"
+                          ? "text-red-600"
+                          : "text-green-600"
+                      }`}
+                    >
+                      {order.payment.pgStatus}
+                    </span>
                   </p>
 
                   <p>
