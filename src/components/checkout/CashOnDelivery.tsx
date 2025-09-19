@@ -33,7 +33,7 @@ const CashOnDelivery = () => {
         addressId: userCheckoutAddress?.addressId,
         pgName: "Cash on Delivery",
         pgPaymentId: "N/A",
-        pgStatus: "pending",
+        pgStatus: "Pending",
         pgResponseMessage: "Order placed with Cash on Delivery",
       };
       dispatch(
