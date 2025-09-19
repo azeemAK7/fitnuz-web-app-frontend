@@ -148,7 +148,7 @@ const Navbar = () => {
                 }
                 `}
                 to={"/cart"}
-                onClick={() => setNavbarOpen(!navbarOpen)}
+                onClick={() => setNavbarOpen(false)}
               >
                 <Badge
                   showZero
