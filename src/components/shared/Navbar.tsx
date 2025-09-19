@@ -39,6 +39,7 @@ const Navbar = () => {
                 }
                 `}
               to={"/home"}
+              onClick={() => setNavbarOpen(!navbarOpen)}
             >
               Home
             </Link>
@@ -53,6 +54,7 @@ const Navbar = () => {
                 }
                 `}
               to={"/product"}
+              onClick={() => setNavbarOpen(!navbarOpen)}
             >
               Products
             </Link>
@@ -67,6 +69,7 @@ const Navbar = () => {
                 }
                 `}
               to={"/about"}
+              onClick={() => setNavbarOpen(!navbarOpen)}
             >
               About
             </Link>
@@ -81,11 +84,12 @@ const Navbar = () => {
                 }
                 `}
               to={"/contact"}
+              onClick={() => setNavbarOpen(!navbarOpen)}
             >
               Contact
             </Link>
           </li>
-          <li className="font-[500] transition-all duration-150">
+          <li className="font-[500] transition-all duration-150 hidden sm:block">
             <Link
               className={`
                 ${
@@ -95,6 +99,7 @@ const Navbar = () => {
                 }
                 `}
               to={"/cart"}
+              onClick={() => setNavbarOpen(!navbarOpen)}
             >
               <Badge
                 showZero
@@ -131,16 +136,46 @@ const Navbar = () => {
             </li>
           )}
         </ul>
-        <button
-          onClick={() => setNavbarOpen(!navbarOpen)}
-          className="sm:hidden flex items-center sm:mt-0 mt-2"
-        >
-          {navbarOpen ? (
-            <RxCross2 className="text-white text-3xl" />
-          ) : (
-            <IoIosMenu className="text-white text-3xl" />
-          )}
-        </button>
+        <div className="sm:hidden flex flex-row gap-4 items-center">
+          <ul>
+            <li className="font-[500] transition-all duration-150">
+              <Link
+                className={`
+                ${
+                  path === "/cart"
+                    ? "text-white font-semibold"
+                    : "text-gray-200"
+                }
+                `}
+                to={"/cart"}
+                onClick={() => setNavbarOpen(!navbarOpen)}
+              >
+                <Badge
+                  showZero
+                  badgeContent={cart?.length || 0}
+                  color="primary"
+                  overlap="circular"
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "right",
+                  }}
+                >
+                  <FaShoppingCart size={25} />
+                </Badge>
+              </Link>
+            </li>
+          </ul>
+          <button
+            onClick={() => setNavbarOpen(!navbarOpen)}
+            className="sm:hidden flex items-center sm:mt-0 mt-2"
+          >
+            {navbarOpen ? (
+              <RxCross2 className="text-white text-3xl" />
+            ) : (
+              <IoIosMenu className="text-white text-3xl" />
+            )}
+          </button>
+        </div>
       </div>
     </div>
   );
