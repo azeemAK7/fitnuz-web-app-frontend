@@ -22,6 +22,7 @@ import AdminLayout from "./components/admin/AdminLayout";
 import Orders from "./components/admin/orders/Orders";
 import AdminProducts from "./components/admin/products/AdminProducts";
 import AdminCategory from "./components/admin/categories/AdminCategory";
+import UserOrder from "./components/user/UserOrders";
 
 function AppWrapper() {
   const location = useLocation();
@@ -48,6 +49,7 @@ function AppWrapper() {
         <Route element={<PrivateRoute />}>
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/order-confirm" element={<OrderConfirmation />} />
+          <Route path="/profile/orders" element={<UserOrder />} />
         </Route>
 
         <Route element={<PrivateRoute adminOnly />}>

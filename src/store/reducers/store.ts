@@ -8,6 +8,7 @@ import type { CartItemType } from "../../types/common";
 import { AdminReducer } from "./AdminReducer";
 import { orderReducer } from "./OrderReducer";
 import { AdminCategoryReducer } from "./AdminCategoryReducer";
+import { userReducer } from "./UserReducer";
 
 // 1. Combine reducers
 const rootReducer = combineReducers({
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   carts: cartReducer,
   payment: paymentReducer,
   admin: AdminReducer,
+  user: userReducer,
   order: orderReducer,
   adminCategory: AdminCategoryReducer,
 });

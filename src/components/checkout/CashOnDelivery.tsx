@@ -31,7 +31,7 @@ const CashOnDelivery = () => {
       }
       const sendData = {
         addressId: userCheckoutAddress?.addressId,
-        pgName: "COD",
+        pgName: "Cash on Delivery",
         pgPaymentId: "N/A",
         pgStatus: "pending",
         pgResponseMessage: "Order placed with Cash on Delivery",
@@ -58,7 +58,7 @@ const CashOnDelivery = () => {
           onClick={handleSubmit}
           disabled={loading}
         >
-          Confirm Order
+          {loading ? "Loading..." : "Confirm Order"}
         </Button>
       </div>
     </div>

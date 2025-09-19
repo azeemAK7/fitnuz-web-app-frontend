@@ -130,9 +130,9 @@ const AddressForm: React.FC<AddressFormProps> = ({
           type="submit"
         >
           {btnLoader ? (
-            <>
-              <Spinners /> loading...
-            </>
+            <div className="flex gap-2 items-center">
+              <Spinners /> Saving...
+            </div>
           ) : (
             <>save</>
           )}

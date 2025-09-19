@@ -394,10 +394,10 @@ export const cashOnDeliveryConfirmation =
         toast.success("Order Accepted");
         navigate("/order-confirm");
       } else {
-        toast.error("Payment Failed. Please try again.");
+        toast.error("Failed. Please try again.");
       }
     } catch {
-      toast.error("Payment Failed. Please try again.");
+      toast.error("Failed. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -414,6 +414,29 @@ export const resetClientSecret = () => {
   return {
     type: "RESET_CLIENT_SECRET",
   };
+};
+
+export const fetchUserOrders = () => async (dispatch: AppDispatch) => {
+  try {
+    dispatch({ type: "IS_FETCHING" });
+    const { data } = await api.get(`/user/orders`);
+
+    dispatch({
+      type: "FETCH_USER_ORDERS",
+      payload: data.content,
+      pageSize: data.pageSize,
+      pageNumber: data.pageNumber,
+      totalElements: data.totalElements,
+      totalPages: data.totalPages,
+      isLastPage: data.isLastPage,
+    });
+    dispatch({ type: "IS_SUCCESS" });
+  } catch (error) {
+    dispatch({
+      type: "IS_ERROR",
+      payload: getErrorMessage(error),
+    });
+  }
 };
 
 export const getAnalytics = () => async (dispatch: AppDispatch) => {

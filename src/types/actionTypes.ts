@@ -91,3 +91,13 @@ export interface FetchOrdersAction {
   totalPages: number;
   isLastPage: boolean;
 }
+
+export interface FetchUserOrdersAction {
+  type: "FETCH_USER_ORDERS";
+  payload: Order[];
+  pageSize: number;
+  pageNumber: number;
+  totalElements: number;
+  totalPages: number;
+  isLastPage: boolean;
+}
