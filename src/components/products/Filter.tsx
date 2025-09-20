@@ -50,6 +50,7 @@ const Filter = () => {
     } else {
       params.set("category", selectedCategory);
     }
+    params.set("page", "1");
     navigate(`${pathname}?${params}`);
   };
 
@@ -60,18 +61,26 @@ const Filter = () => {
   useEffect(() => {
     const handler = setTimeout(() => {
       const updatedParams = new URLSearchParams(searchParams);
+      const currentKeyword = searchParams.get("keyword") || "";
+
       if (keyword) {
         updatedParams.set("keyword", keyword);
+
+        if (keyword !== currentKeyword) {
+          updatedParams.set("page", "1");
+        }
       } else {
         updatedParams.delete("keyword");
+        updatedParams.set("page", "1");
       }
+
       navigate(`${pathname}?${updatedParams.toString()}`);
     }, 700);
 
     return () => {
       clearTimeout(handler);
     };
-  }, [keyword, navigate, params, pathname, searchParams]);
+  }, [keyword, navigate, pathname]);
 
   const toggleSortOrder = () => {
     setSortOrderDir((prevOrder) => {
@@ -84,7 +93,6 @@ const Filter = () => {
 
   return (
     <div className="flex lg:flex-row flex-col-reverse lg:justify-between justify-center items-center lg:gap-4 gap-3">
-      {/* SEARCH BAR */}
       <div className="relative flex items-center 2xl:w-[450px] sm:w-[420px] w-full">
         <input
           type="text"

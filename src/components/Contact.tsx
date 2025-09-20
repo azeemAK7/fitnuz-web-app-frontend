@@ -192,7 +192,7 @@ const Contact = () => {
                       <div className="flex-1 break-all">
                         <p className="text-gray-300 text-sm">Email Orders</p>
                         <p className="text-white font-semibold sm:text-md text-sm">
-                          abdulkhaderazeem7666gmail.com
+                          abdulkhaderazeem7666@gmail.com
                         </p>
                       </div>
                     </div>

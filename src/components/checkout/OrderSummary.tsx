@@ -8,6 +8,10 @@ const OrderSummary = () => {
 
   const { cart, totalPrice } = useAppSelector((state) => state.carts);
 
+  // if (cart && cart.length === 0) {
+  //   return <ErrorPage message="Server Error Please Refresh The Page"/>;
+  // }
+
   return (
     <div className="container mx-auto px-4 mb-8">
       <div className="flex flex-wrap">
