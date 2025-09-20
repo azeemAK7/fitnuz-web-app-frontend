@@ -16,10 +16,11 @@ const useProductHook = () => {
     const keyword = searchParams.get("keyword") || null;
     const category = searchParams.get("category") || null;
     const sortOrderDir = searchParams.get("sortOrderDir") || "asc";
+    const sortBy = searchParams.get("sortBy") || "productId";
 
     params.set("pageNumber", `${pageNumber - 1}`);
     params.set("sortOrderDir", sortOrderDir);
-    params.set("sortBy", "productPrice");
+    params.set("sortBy", sortBy);
 
     if (keyword) {
       params.set("keyword", keyword);

@@ -86,6 +86,7 @@ const Filter = () => {
     setSortOrderDir((prevOrder) => {
       const newOrder = prevOrder === "asc" ? "desc" : "asc";
       params.set("sortOrderDir", newOrder);
+      params.set("sortBy", "productPrice");
       navigate(`${pathname}?${params}`);
       return newOrder;
     });
