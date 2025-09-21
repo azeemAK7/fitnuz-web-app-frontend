@@ -101,32 +101,32 @@ const Home = () => {
             />
           </div>
 
-          <div className="flex justify-center">
-            <Link to="/product">
-              <button
-                className="group relative px-8 py-4 
-      bg-gradient-to-r from-[#8b6a4e] to-[#6e533d] 
-      text-white font-bold rounded-full overflow-hidden 
-      transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer"
-              >
-                <span className="relative z-10 text-xl cursor-pointer">
-                  Shop Now
-                </span>
-
-                <div
-                  className="absolute inset-0 
-        bg-gradient-to-r from-[#6e533d] to-[#8b6a4e] 
-        opacity-0 group-hover:opacity-100 
-        transition-opacity duration-300"
-                />
-              </button>
-            </Link>
-          </div>
-
           {/* {products &&
               products
                 .slice(0, 6)
                 .map((item, i) => <ProductCard key={i} {...item} />)} */}
+        </div>
+
+        <div className="flex justify-center">
+          <Link to="/product">
+            <button
+              className="group relative px-8 py-4 
+      bg-gradient-to-r from-[#8b6a4e] to-[#6e533d] 
+      text-white font-bold rounded-full overflow-hidden 
+      transition-all duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer"
+            >
+              <span className="relative z-10 text-xl cursor-pointer">
+                Shop Now
+              </span>
+
+              <div
+                className="absolute inset-0 
+        bg-gradient-to-r from-[#6e533d] to-[#8b6a4e] 
+        opacity-0 group-hover:opacity-100 
+        transition-opacity duration-300"
+              />
+            </button>
+          </Link>
         </div>
 
         {/* {isLoading ? (
