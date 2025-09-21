@@ -28,6 +28,7 @@ const Home = () => {
       <div className=" py-6">
         <Banner />
       </div>
+
       <div className="py-5">
         <div className="flex flex-col justify-center items-center space-y-2">
           <h1 className="text-slate-800 text-4xl font-bold">Products</h1>
@@ -85,7 +86,7 @@ const Home = () => {
             />
           </div>
 
-          <div className="w-full h-60 sm:h-100 md:h-110 hidden 2xl:block">
+          <div className="w-full h-60 sm:h-100 md:h-110">
             <img
               className="w-full h-full cursor-pointer object-cover transition-transform duration-300 transform hover:scale-105 rounded-3xl"
               src={Fig}
@@ -93,7 +94,7 @@ const Home = () => {
             />
           </div>
 
-          <div className="w-full h-60 sm:h-100 md:h-110 hidden 2xl:block">
+          <div className="w-full h-60 sm:h-100 md:h-110">
             <img
               className="w-full h-full cursor-pointer object-cover transition-transform duration-300 transform hover:scale-105 rounded-3xl"
               src={Hazelnut}
@@ -107,7 +108,7 @@ const Home = () => {
                 .map((item, i) => <ProductCard key={i} {...item} />)} */}
         </div>
 
-        <div className="flex justify-center">
+        <div className="flex justify-center items-center">
           <Link to="/product">
             <button
               className="group relative px-8 py-4 
