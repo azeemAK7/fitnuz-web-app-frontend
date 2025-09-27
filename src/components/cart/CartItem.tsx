@@ -20,7 +20,7 @@ const CartItem = ({ cartItem }: { cartItem: CartItemType }) => {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  const [currentQuantity, setCurrentQuantity] = useState(cartItem.productStock);
+  const [currentQuantity, setCurrentQuantity] = useState(cartItem.cartQuantity);
 
   const handeQtyIncrease = (cartItem: CartItemType) => {
     dispatch(

@@ -49,6 +49,7 @@ export interface CartItemType {
   specialPrice: number;
   discount: number;
   productStock: number;
+  cartQuantity: number;
   image: string;
 }
 

@@ -9,7 +9,6 @@ import type {
   CategoryFormValues,
   NavigateFunction,
   ProductFormValues,
-  ProductType,
   ResetForm,
   SetLoader,
   StripeCustomer,
@@ -76,16 +75,16 @@ export const addToCart =
 
     const { cart } = getState().carts;
     const existingCartItem = cart.find(
-      (item: ProductType) => item.productId === cartProductId
+      (item: CartItemType) => item.productId === cartProductId
     );
 
-    const currentQty = existingCartItem?.productStock || 0;
+    const currentQty = existingCartItem?.cartQuantity || 0;
     const totalQty = currentQty + qty;
 
     if (product.productStock >= totalQty) {
       dispatch({
         type: "ADD_CART",
-        payload: { ...product, productStock: totalQty },
+        payload: { ...product, cartQuantity: totalQty },
       });
       toast.success(`${product.productName} added to cart`);
       //localStorage.setItem("cartItem", JSON.stringify(getState().carts.cart));
@@ -101,22 +100,22 @@ export const increaseCartQty =
     currentQuantity: number,
     setCurrentQuantity: (qty: number) => void
   ) =>
-  (dispatch: AppDispatch, getState: () => RootState) => {
-    const { products } = getState().products;
-    const product = products.find(
-      (item) => item.productId === cartItem.productId
-    );
-    if (!product) {
-      toast.error("Product not found");
-      return;
-    }
+  (dispatch: AppDispatch) => {
+    // const { products } = getState().products;
+    // const product = products.find(
+    //   (item) => item.productId === cartItem.productId
+    // );
+    // if (!product) {
+    //   toast.error("Product not found");
+    //   return;
+    // }
 
     const newQty = currentQuantity + 1;
-    if (product.productStock >= newQty) {
+    if (cartItem.productStock >= newQty) {
       setCurrentQuantity(newQty);
       dispatch({
         type: "ADD_CART",
-        payload: { ...product, productStock: newQty },
+        payload: { ...cartItem, cartQuantity: newQty },
       });
     } else {
       toast.error("Oops! You've reached the maximum available stock.");
@@ -124,16 +123,15 @@ export const increaseCartQty =
   };
 
 export const decreaseCartQty =
-  (cartItem: CartItemType, newQty: number) =>
-  (dispatch: AppDispatch, getState: () => RootState) => {
-    const { products } = getState().products;
-    const product = products.find(
-      (item) => item.productId === cartItem.productId
-    );
+  (cartItem: CartItemType, newQty: number) => (dispatch: AppDispatch) => {
+    // const { products } = getState().products;
+    // const product = products.find(
+    //   (item) => item.productId === cartItem.productId
+    // );
 
     dispatch({
       type: "ADD_CART",
-      payload: { ...product, productStock: newQty },
+      payload: { ...cartItem, cartQuantity: newQty },
     });
   };
 
