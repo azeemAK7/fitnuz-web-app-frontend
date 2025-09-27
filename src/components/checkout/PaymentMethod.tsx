@@ -11,7 +11,7 @@ import {
 } from "../../store/actions/ProductAction";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/storeHooks";
-import type { ProductType } from "../../types/common";
+import type { CartItemType } from "../../types/common";
 
 const PaymentMethod = () => {
   const { paymentMethod } = useAppSelector((state) => state.payment);
@@ -21,10 +21,10 @@ const PaymentMethod = () => {
 
   useEffect(() => {
     if (cart.length > 0 && !error) {
-      const sendCartItems = cart.map((item: ProductType) => {
+      const sendCartItems = cart.map((item: CartItemType) => {
         return {
           productId: item.productId,
-          productStock: item.productStock,
+          productStock: item.cartQuantity,
         };
       });
       dispatch(savecartItems(sendCartItems));
