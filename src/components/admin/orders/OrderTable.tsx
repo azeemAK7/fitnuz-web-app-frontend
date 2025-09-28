@@ -5,6 +5,8 @@ import { adminOrderTableColumn } from "../../helper/TableColumn";
 import UpdateOrderForm from "./UpdateOrderForm";
 import Modal from "../../shared/Modal";
 import type { Order, OrderRow, PaginationType } from "../../../types/common";
+import { useAppDispatch } from "../../../hooks/storeHooks";
+import { downloadInvoice } from "../../../store/actions/ProductAction";
 
 interface OrderTableProps {
   adminOrders: Order[];
@@ -16,6 +18,8 @@ const OrderTable = ({ adminOrders, pagination }: OrderTableProps) => {
   const params = new URLSearchParams(searchParams);
   const pathname = useLocation().pathname;
   const navigate = useNavigate();
+
+  const dispatch = useAppDispatch();
 
   const tableRecords = adminOrders.map((data) => {
     return {
@@ -39,6 +43,10 @@ const OrderTable = ({ adminOrders, pagination }: OrderTableProps) => {
     setDialogOpen(true);
   };
 
+  const handleDownloadInvoice = (id: number) => {
+    dispatch(downloadInvoice(id));
+  };
+
   const handlePaginationChange = (paginationModel: GridPaginationModel) => {
     const page = paginationModel.page + 1;
     setCurrentPage(page);
@@ -54,7 +62,7 @@ const OrderTable = ({ adminOrders, pagination }: OrderTableProps) => {
         <DataGrid
           className="w-full"
           rows={tableRecords}
-          columns={adminOrderTableColumn(handleEdit)}
+          columns={adminOrderTableColumn(handleEdit, handleDownloadInvoice)}
           sx={{
             "& .MuiDataGrid-virtualScroller": {
               marginBottom: "18px",

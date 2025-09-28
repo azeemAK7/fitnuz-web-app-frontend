@@ -4,11 +4,12 @@ import type {
   AdminProductRow,
   OrderRow,
 } from "../../types/common";
-import { FaEye, FaImage } from "react-icons/fa6";
+import { FaDownload, FaEye, FaImage } from "react-icons/fa6";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 
 export const adminOrderTableColumn = (
-  handleEdit: (row: OrderRow) => void
+  handleEdit: (row: OrderRow) => void,
+  handleDownloadInvoice: (id: number) => void
 ): GridColDef<OrderRow>[] => [
   {
     sortable: false,
@@ -106,7 +107,7 @@ export const adminOrderTableColumn = (
     headerClassName: "text-black font-semibold text-center",
     cellClassName: "text-slate-700 font-normal border border-slate-300",
     sortable: false,
-    width: 250,
+    width: 400,
     renderHeader: () => <span>Action</span>,
     renderCell: (params) => {
       return (
@@ -117,6 +118,13 @@ export const adminOrderTableColumn = (
           >
             <FaEdit className="mr-2" />
             Edit
+          </button>
+          <button
+            onClick={() => handleDownloadInvoice(params.row.id)}
+            className="flex items-center bg-green-500 text-white px-4 h-9 rounded-md"
+          >
+            <FaDownload className="mr-2" />
+            Download Invoice
           </button>
         </div>
       );

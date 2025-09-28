@@ -505,6 +505,33 @@ export const updateOrderStatus =
     }
   };
 
+export const downloadInvoice =
+  (orderId: number) => async (dispatch: AppDispatch) => {
+    console.log(orderId);
+    try {
+      dispatch({ type: "IS_FETCHING" });
+
+      const response = await api.get(`/admin/orders/${orderId}/invoice`, {
+        responseType: "blob",
+      });
+
+      const fileURL = window.URL.createObjectURL(new Blob([response.data]));
+      const fileLink = document.createElement("a");
+      fileLink.href = fileURL;
+      fileLink.setAttribute("download", `Order_${orderId}.pdf`);
+      document.body.appendChild(fileLink);
+      fileLink.click();
+      fileLink.remove();
+
+      dispatch({ type: "IS_SUCCESS" });
+    } catch (error) {
+      dispatch({
+        type: "IS_ERROR",
+        payload: getErrorMessage(error),
+      });
+    }
+  };
+
 export const fetchAdminProducts =
   (queryString: string = "") =>
   async (dispatch: AppDispatch) => {
