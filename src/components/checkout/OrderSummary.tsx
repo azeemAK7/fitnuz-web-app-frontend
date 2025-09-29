@@ -1,16 +1,21 @@
 import { formatPriceCalculation } from "../../util/truncate";
 import type { CartItemType } from "../../types/common";
-import { useAppSelector } from "../../hooks/storeHooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/storeHooks";
+import { getcartItems } from "../../store/actions/ProductAction";
+import { useEffect } from "react";
 
 const OrderSummary = () => {
   const { paymentMethod } = useAppSelector((state) => state.payment);
   const { userSelectedCheckoutAddress } = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
 
   const { cart, totalPrice } = useAppSelector((state) => state.carts);
 
-  // if (cart && cart.length === 0) {
-  //   return <ErrorPage message="Server Error Please Refresh The Page"/>;
-  // }
+  useEffect(() => {
+    if (!cart || cart.length === 0) {
+      dispatch(getcartItems());
+    }
+  }, [dispatch]);
 
   return (
     <div className="container mx-auto px-4 mb-8">
