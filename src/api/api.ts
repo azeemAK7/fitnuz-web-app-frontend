@@ -15,7 +15,7 @@ api.interceptors.response.use(
 
       // 🚪 Redirect to login
       window.location.href = "/login";
-      toast.success("You have  been logged out!");
+      toast.success("Session Expired You have been logged out!");
 
       return Promise.reject(error);
     }
