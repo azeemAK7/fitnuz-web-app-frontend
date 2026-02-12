@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { IoChatbubbleEllipsesSharp, IoClose, IoSend } from "react-icons/io5";
-import { ChatMessage } from "../../types/chatTypes";
+import type { ChatMessage } from "../../types/chatTypes";
 import { sendChatMessage } from "../../api/chatApi";
 import ChatMessageBubble from "./ChatMessageBubble";
 

@@ -1,5 +1,5 @@
 import api from "./api";
-import { ChatMessage, ChatResponse } from "../types/chatTypes";
+import type { ChatMessage, ChatResponse } from "../types/chatTypes";
 
 export const sendChatMessage = async (
   message: string,
