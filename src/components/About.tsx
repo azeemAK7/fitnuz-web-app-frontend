@@ -1,12 +1,13 @@
 import { FaLeaf } from "react-icons/fa6";
 import fitnuzlogoreal from "../assets/sliders/fitnuzlogoreal.png";
+import CountUp from "react-countup";
 
 const About = () => {
   const stats = [
-    { value: "50K+", label: "Happy Customers", icon: "👥" },
-    { value: "99.9%", label: "Purity Rate", icon: "✨" },
-    { value: "24hr", label: "Fresh Guarantee", icon: "⚡" },
-    { value: "100%", label: "Customer Satisfaction", icon: "💚" },
+    { end: 50, suffix: "K+", decimals: 0, label: "Happy Customers", icon: "👥" },
+    { end: 99.9, suffix: "%", decimals: 1, label: "Purity Rate", icon: "✨" },
+    { end: 24, suffix: "hr", decimals: 0, label: "Fresh Guarantee", icon: "⚡" },
+    { end: 100, suffix: "%", decimals: 0, label: "Customer Satisfaction", icon: "💚" },
   ];
   return (
     <div
@@ -76,7 +77,14 @@ const About = () => {
             >
               <div className="sm:text-3xl text-2xl mb-2">{stat.icon}</div>
               <div className="lg:text-6xl md:text-4xl text-3xl font-bold text-transparent bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text mb-1">
-                {stat.value}
+                <CountUp
+                  end={stat.end}
+                  suffix={stat.suffix}
+                  decimals={stat.decimals}
+                  duration={2.5}
+                  enableScrollSpy
+                  scrollSpyOnce
+                />
               </div>
               <div className="sm:text-xl text-sm text-gray-400">
                 {stat.label}

@@ -21,6 +21,7 @@ export interface DashboardOverviewProps {
   amount: string | number;
   Icon: IconType;
   revenue?: boolean;
+  color?: string;
 }
 
 export interface AddressType {
