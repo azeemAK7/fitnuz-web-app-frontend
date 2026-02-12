@@ -1,12 +1,12 @@
 import { Badge } from "@mui/material";
 import { useState } from "react";
-import { FaShoppingCart, FaSignInAlt } from "react-icons/fa";
-import { FaStore } from "react-icons/fa6";
+import { FaShoppingCart, FaSignInAlt, FaStore } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import { RxCross2 } from "react-icons/rx";
 import { IoIosMenu } from "react-icons/io";
 import { useSelector } from "react-redux";
 import UserMenu from "../UserMenu";
+import NotificationBell from "./NotificationBell";
 import type { RootState } from "../../store/reducers/store";
 
 const Navbar = () => {
@@ -27,62 +27,54 @@ const Navbar = () => {
         <ul
           className={`flex sm:gap-10 gap-4 sm:items-center  text-slate-800 sm:static absolute left-0 top-[70px] sm:shadow-none shadow-md ${
             navbarOpen ? "h-fit sm:pb-0 pb-5" : "h-0 overflow-hidden"
-          }  transition-all duration-100 sm:h-fit sm:bg-none bg-black   text-white sm:w-fit w-full sm:flex-row flex-col px-4 sm:px-0`}
+          }  transition-all duration-100 sm:h-fit sm:overflow-visible sm:bg-none bg-black   text-white sm:w-fit w-full sm:flex-row flex-col px-4 sm:px-0`}
         >
-          <li className="font-[500] transition-all duration-150">
+          <li className="font-[500]">
             <Link
-              className={`
-                ${
-                  path === "/home"
-                    ? "text-white font-semibold underline decoration-gray-600 decoration-2 underline-offset-4"
-                    : "text-gray-200"
-                }
-                `}
+              className={`relative pb-1 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-gray-400 after:transition-all after:duration-300 ${
+                path === "/home"
+                  ? "text-white font-semibold after:w-full"
+                  : "text-gray-200 after:w-0 hover:after:w-full"
+              }`}
               to={"/home"}
               onClick={() => setNavbarOpen(!navbarOpen)}
             >
               Home
             </Link>
           </li>
-          <li className="font-[500] transition-all duration-150">
+          <li className="font-[500]">
             <Link
-              className={`
-                ${
-                  path === "/product"
-                    ? "text-white font-semibold underline decoration-gray-600 decoration-2 underline-offset-4"
-                    : "text-gray-200"
-                }
-                `}
+              className={`relative pb-1 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-gray-400 after:transition-all after:duration-300 ${
+                path === "/product"
+                  ? "text-white font-semibold after:w-full"
+                  : "text-gray-200 after:w-0 hover:after:w-full"
+              }`}
               to={"/product"}
               onClick={() => setNavbarOpen(!navbarOpen)}
             >
               Products
             </Link>
           </li>
-          <li className="font-[500] transition-all duration-150">
+          <li className="font-[500]">
             <Link
-              className={`
-                ${
-                  path === "/about"
-                    ? "text-white font-semibold underline decoration-gray-600 decoration-2 underline-offset-4"
-                    : "text-gray-200"
-                }
-                `}
+              className={`relative pb-1 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-gray-400 after:transition-all after:duration-300 ${
+                path === "/about"
+                  ? "text-white font-semibold after:w-full"
+                  : "text-gray-200 after:w-0 hover:after:w-full"
+              }`}
               to={"/about"}
               onClick={() => setNavbarOpen(!navbarOpen)}
             >
               About
             </Link>
           </li>
-          <li className="font-[500] transition-all duration-150">
+          <li className="font-[500]">
             <Link
-              className={`
-                ${
-                  path === "/contact"
-                    ? "text-white font-semibold underline decoration-gray-600 decoration-2 underline-offset-4"
-                    : "text-gray-200"
-                }
-                `}
+              className={`relative pb-1 after:absolute after:bottom-0 after:left-0 after:h-[2px] after:bg-gray-400 after:transition-all after:duration-300 ${
+                path === "/contact"
+                  ? "text-white font-semibold after:w-full"
+                  : "text-gray-200 after:w-0 hover:after:w-full"
+              }`}
               to={"/contact"}
               onClick={() => setNavbarOpen(!navbarOpen)}
             >
@@ -115,6 +107,12 @@ const Navbar = () => {
               </Badge>
             </Link>
           </li>
+
+          {user && user.id && (
+            <li className="font-[500] transition-all duration-150 hidden sm:block">
+              <NotificationBell />
+            </li>
+          )}
 
           {user && user.id ? (
             <li className="font-[500] transition-all duration-150 ">
@@ -165,6 +163,7 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
+          {user && user.id && <NotificationBell />}
           <button
             onClick={() => setNavbarOpen(!navbarOpen)}
             className="sm:hidden flex items-center sm:mt-0 mt-2"

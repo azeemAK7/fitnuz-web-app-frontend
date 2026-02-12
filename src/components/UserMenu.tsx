@@ -34,10 +34,12 @@ const UserMenu = () => {
   return (
     <div className="relative z-30">
       <div
-        className="sm:border-[1px] sm:border-slate-400 flex flex-row items-center gap-1 rounded-full cursor-pointer hover:shadow-md transition text-slate-700"
+        className="border-2 border-white inline-flex shrink-0 flex-row items-center gap-1 rounded-full cursor-pointer hover:shadow-md transition"
         onClick={handleClick}
       >
-        <Avatar alt="avatar" />
+        <Avatar alt="avatar" sx={{ bgcolor: "#000000", color: "#ffffff" }}>
+          {user?.userName?.charAt(0).toUpperCase()}
+        </Avatar>
       </div>
       <Menu
         sx={{ width: "400px" }}

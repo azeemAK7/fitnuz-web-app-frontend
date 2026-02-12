@@ -9,6 +9,8 @@ import { AdminReducer } from "./AdminReducer";
 import { orderReducer } from "./OrderReducer";
 import { AdminCategoryReducer } from "./AdminCategoryReducer";
 import { userReducer } from "./UserReducer";
+import { notificationReducer } from "./NotificationReducer";
+import type { NotificationType } from "../../types/notificationTypes";
 
 // 1. Combine reducers
 const rootReducer = combineReducers({
@@ -21,6 +23,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   order: orderReducer,
   adminCategory: AdminCategoryReducer,
+  notifications: notificationReducer,
 });
 
 // 2. Export RootState (based on rootReducer, NOT store)
@@ -70,9 +73,17 @@ const saveCartToLocalStorage = debounce((cart: CartItemType[]) => {
   localStorage.setItem("cartItems", JSON.stringify(cart));
 }, 300);
 
+const saveNotificationsToLocalStorage = debounce(
+  (notifications: NotificationType[]) => {
+    localStorage.setItem("notifications", JSON.stringify(notifications));
+  },
+  300
+);
+
 store.subscribe(() => {
-  const { carts } = store.getState();
+  const { carts, notifications } = store.getState();
   saveCartToLocalStorage(carts.cart);
+  saveNotificationsToLocalStorage(notifications.notifications);
 });
 
 export default store;

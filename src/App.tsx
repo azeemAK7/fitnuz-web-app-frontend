@@ -23,8 +23,11 @@ import Orders from "./components/admin/orders/Orders";
 import AdminProducts from "./components/admin/products/AdminProducts";
 import AdminCategory from "./components/admin/categories/AdminCategory";
 import UserOrder from "./components/user/UserOrders";
+import Profile from "./components/user/Profile";
+import useNotificationPolling from "./hooks/useNotificationPolling";
 
 function AppWrapper() {
+  useNotificationPolling();
   const location = useLocation();
   const hideNavbarOnPaths = ["/"];
 
@@ -49,6 +52,7 @@ function AppWrapper() {
         <Route element={<PrivateRoute />}>
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/order-confirm" element={<OrderConfirmation />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/profile/orders" element={<UserOrder />} />
         </Route>
 

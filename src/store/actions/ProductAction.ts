@@ -193,8 +193,11 @@ export const registerUser =
 export const logoutUser =
   (navigate: NavigateFunction, toast: ToastType) => (dispatch: AppDispatch) => {
     dispatch({ type: "LOGOUT_USER" });
+    dispatch({ type: "CLEAR_ALL_NOTIFICATIONS" });
     toast.success("You have been signed out successfully");
     localStorage.removeItem("auth");
+    localStorage.removeItem("notifications");
+    localStorage.removeItem("orderStatusSnapshot");
     navigate("/login");
   };
 
@@ -362,6 +365,18 @@ export const stripePaymentConfirmation =
         dispatch({ type: "RESET_CHECKOUT_ADDRESS" });
         dispatch({ type: "CLEAR_CART" });
         dispatch(resetClientSecret());
+        dispatch({
+          type: "ADD_NOTIFICATION",
+          payload: {
+            id: `order-placed-${Date.now()}`,
+            type: "ORDER_PLACED",
+            title: "Order Placed",
+            message: "Your order has been placed successfully!",
+            orderId: response.data.orderId ?? 0,
+            read: false,
+            createdAt: new Date().toISOString(),
+          },
+        });
         toast.success("Order Accepted");
       } else {
         setErrorMesssage("Payment Failed. Please try again.");
@@ -389,6 +404,18 @@ export const cashOnDeliveryConfirmation =
         localStorage.removeItem("client-secret");
         dispatch({ type: "RESET_CHECKOUT_ADDRESS" });
         dispatch({ type: "CLEAR_CART" });
+        dispatch({
+          type: "ADD_NOTIFICATION",
+          payload: {
+            id: `order-placed-${Date.now()}`,
+            type: "ORDER_PLACED",
+            title: "Order Placed",
+            message: "Your order has been placed successfully!",
+            orderId: response.data.orderId ?? 0,
+            read: false,
+            createdAt: new Date().toISOString(),
+          },
+        });
         toast.success("Order Accepted");
         navigate("/order-confirm");
       } else {
