@@ -25,6 +25,7 @@ import AdminCategory from "./components/admin/categories/AdminCategory";
 import UserOrder from "./components/user/UserOrders";
 import Profile from "./components/user/Profile";
 import useNotificationPolling from "./hooks/useNotificationPolling";
+import ChatWidget from "./components/chat/ChatWidget";
 
 function AppWrapper() {
   useNotificationPolling();
@@ -66,6 +67,7 @@ function AppWrapper() {
         </Route>
       </Routes>
       <Toaster position="top-center" />
+      <ChatWidget />
     </>
   );
 }
