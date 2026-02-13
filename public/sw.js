@@ -11,8 +11,16 @@ self.addEventListener("push", function (event) {
   const title = data.title || "FitNuz";
   const options = {
     body: data.body || "",
-    icon: "/favicon.ico",
-    badge: "/favicon.ico",
+    icon: "/notification-icon.png",
+    badge: "/notification-icon.png",
+    image: data.image || undefined,
+    tag: data.orderId ? "order-" + data.orderId : "fitnuz-notification",
+    renotify: true,
+    vibrate: [100, 50, 100, 50, 200],
+    actions: [
+      { action: "view", title: "View Order" },
+      { action: "dismiss", title: "Dismiss" },
+    ],
     data: {
       url: data.url || "/profile/orders",
       orderId: data.orderId,
@@ -24,6 +32,8 @@ self.addEventListener("push", function (event) {
 
 self.addEventListener("notificationclick", function (event) {
   event.notification.close();
+
+  if (event.action === "dismiss") return;
 
   const url = event.notification.data?.url || "/profile/orders";
 
