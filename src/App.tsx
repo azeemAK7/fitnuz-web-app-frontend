@@ -25,10 +25,12 @@ import AdminCategory from "./components/admin/categories/AdminCategory";
 import UserOrder from "./components/user/UserOrders";
 import Profile from "./components/user/Profile";
 import useNotificationPolling from "./hooks/useNotificationPolling";
+import usePushNotifications from "./hooks/usePushNotifications";
 import ChatWidget from "./components/chat/ChatWidget";
 
 function AppWrapper() {
   useNotificationPolling();
+  usePushNotifications();
   const location = useLocation();
   const hideNavbarOnPaths = ["/"];
 

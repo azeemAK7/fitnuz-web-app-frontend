@@ -21,6 +21,7 @@ import type {
   RegisterFormValues,
 } from "../../types/formTypes";
 import type { AppDispatch, RootState } from "../reducers/store";
+import { unsubscribeFromPush } from "../../utils/pushNotifications";
 
 export const fetchProducts =
   (queryString = "") =>
@@ -191,7 +192,8 @@ export const registerUser =
   };
 
 export const logoutUser =
-  (navigate: NavigateFunction, toast: ToastType) => (dispatch: AppDispatch) => {
+  (navigate: NavigateFunction, toast: ToastType) => async (dispatch: AppDispatch) => {
+    await unsubscribeFromPush();
     dispatch({ type: "LOGOUT_USER" });
     dispatch({ type: "CLEAR_ALL_NOTIFICATIONS" });
     toast.success("You have been signed out successfully");
