@@ -84,6 +84,11 @@ const UserOrder = () => {
                       <div className="flex-1 px-1">
                         <p className="font-semibold">
                           {item.product.productName}
+                          {item.weightLabel && (
+                            <span className="text-sm font-normal text-gray-500 ml-1">
+                              ({item.weightLabel})
+                            </span>
+                          )}
                         </p>
                         <p className="text-sm text-gray-500">
                           {item.product.productCategory}

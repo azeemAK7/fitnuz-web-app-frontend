@@ -1,6 +1,10 @@
 import type { CartAction, CartState } from "../../types/common";
 
-const cartItems = JSON.parse(localStorage.getItem("cartItems") ?? "[]");
+const storedItems = JSON.parse(localStorage.getItem("cartItems") ?? "[]");
+// Filter out old localStorage items without variantId
+const cartItems = Array.isArray(storedItems)
+  ? storedItems.filter((item: { variantId?: number }) => item.variantId)
+  : [];
 
 const initialState: CartState = {
   cart: cartItems,
@@ -13,12 +17,12 @@ export const cartReducer = (state = initialState, action: CartAction) => {
     case "ADD_CART": {
       const product = action.payload;
       const existingProduct = state.cart.find(
-        (item) => item.productId === product.productId
+        (item) => item.variantId === product.variantId
       );
 
       if (existingProduct) {
         const updatedCart = state.cart.map((item) =>
-          item.productId === product.productId ? product : item
+          item.variantId === product.variantId ? product : item
         );
         return {
           ...state,
@@ -36,7 +40,7 @@ export const cartReducer = (state = initialState, action: CartAction) => {
       return {
         ...state,
         cart: state.cart.filter(
-          (item) => item.productId !== action.payload.productId
+          (item) => item.variantId !== action.payload.variantId
         ),
       };
 

@@ -39,7 +39,7 @@ const Cart = () => {
         {cart &&
           cart.length > 0 &&
           cart.map((item: CartItemType) => (
-            <CartItem key={item.productId} cartItem={item} />
+            <CartItem key={item.variantId || item.productId} cartItem={item} />
           ))}
       </div>
 

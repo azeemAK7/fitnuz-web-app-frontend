@@ -65,7 +65,7 @@ export const fetchCategories = () => async (dispatch: AppDispatch) => {
 };
 
 export const addToCart =
-  (cartProductId: number, qty = 1, toast: ToastType) =>
+  (cartProductId: number, variantId: number, qty = 1, toast: ToastType) =>
   (dispatch: AppDispatch, getState: () => RootState) => {
     const { products } = getState().products;
     const product = products.find((item) => item.productId === cartProductId);
@@ -74,21 +74,35 @@ export const addToCart =
       return;
     }
 
+    const variant = product.variants?.find((v) => v.variantId === variantId);
+    if (!variant) {
+      toast.error("Variant not found");
+      return;
+    }
+
     const { cart } = getState().carts;
     const existingCartItem = cart.find(
-      (item: CartItemType) => item.productId === cartProductId
+      (item: CartItemType) => item.variantId === variantId
     );
 
     const currentQty = existingCartItem?.cartQuantity || 0;
     const totalQty = currentQty + qty;
 
-    if (product.productStock >= totalQty) {
+    if (variant.stock >= totalQty) {
       dispatch({
         type: "ADD_CART",
-        payload: { ...product, cartQuantity: totalQty },
+        payload: {
+          ...product,
+          productPrice: variant.price,
+          specialPrice: variant.specialPrice,
+          discount: variant.discount,
+          productStock: variant.stock,
+          variantId: variant.variantId,
+          weightLabel: variant.weightLabel,
+          cartQuantity: totalQty,
+        },
       });
-      toast.success(`${product.productName} added to cart`);
-      //localStorage.setItem("cartItem", JSON.stringify(getState().carts.cart));
+      toast.success(`${product.productName} (${variant.weightLabel}) added to cart`);
     } else {
       toast.error("Out Of Stock");
     }
@@ -140,7 +154,7 @@ export const removeCartItem =
   (cartItem: CartItemType, toast: ToastType) => (dispatch: AppDispatch) => {
     dispatch({
       type: "REMOVE_CART_ITEM",
-      payload: { ...cartItem },
+      payload: { variantId: cartItem.variantId },
     });
     toast.success(`${cartItem.productName} removed from cart`);
   };
@@ -607,10 +621,7 @@ export const updateProductDetails =
         getFieldErrors(error, [
           "productName",
           "productDescription",
-          "productPrice",
-          "productStock",
-          "specialPrice",
-          "discount",
+          "variants",
           "message",
         ])
       );
@@ -640,10 +651,7 @@ export const addNewProduct =
         getFieldErrors(error, [
           "productName",
           "productDescription",
-          "productPrice",
-          "productStock",
-          "specialPrice",
-          "discount",
+          "variants",
           "message",
         ])
       );

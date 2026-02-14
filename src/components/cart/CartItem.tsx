@@ -46,6 +46,11 @@ const CartItem = ({ cartItem }: { cartItem: CartItemType }) => {
         <div className="flex md:flex-row flex-col lg:gap-4 sm:gap-3 gap-0 items-start ">
           <h3 className="lg:text-[17px] text-sm font-semibold text-slate-600">
             {truncate(cartItem.productName, 90)}
+            {cartItem.weightLabel && (
+              <span className="text-xs font-normal text-gray-500 ml-1">
+                ({cartItem.weightLabel})
+              </span>
+            )}
           </h3>
         </div>
         <div className="md:w-36 sm:w-24 w-12">

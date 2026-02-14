@@ -61,14 +61,21 @@ const OrderSummary = () => {
               <h2 className="text-2xl font-semibold mb-2">Order Items</h2>
               <div className="space-y-2">
                 {cart?.map((item: CartItemType) => (
-                  <div key={item?.productId} className="flex items-center">
+                  <div key={item?.variantId || item?.productId} className="flex items-center">
                     <img
                       src={item.image}
                       alt="Product"
                       className="w-12 h-12 rounded mr-4"
                     ></img>
                     <div className="text-gray-500">
-                      <p>{item?.productName}</p>
+                      <p>
+                        {item?.productName}
+                        {item?.weightLabel && (
+                          <span className="text-xs text-gray-400 ml-1">
+                            ({item.weightLabel})
+                          </span>
+                        )}
+                      </p>
                       <p>
                         {item?.cartQuantity} x ₹{item?.specialPrice} = ₹
                         {formatPriceCalculation(

@@ -41,6 +41,16 @@ export interface User {
   userRoles: string[]; // or a stricter enum type if needed
 }
 
+export interface ProductVariantType {
+  variantId: number;
+  weightLabel: string;
+  weightInGrams: number;
+  price: number;
+  specialPrice: number;
+  discount: number;
+  stock: number;
+}
+
 export interface CartItemType {
   productId: number;
   productName: string;
@@ -52,10 +62,14 @@ export interface CartItemType {
   productStock: number;
   cartQuantity: number;
   image: string;
+  variantId: number;
+  weightLabel: string;
+  variants?: ProductVariantType[];
 }
 
 export interface CartItemUpdate {
   productId: number;
+  variantId: number;
   productStock: number;
 }
 
@@ -69,17 +83,25 @@ export interface ProductType {
   productPrice: number;
   discount: number;
   specialPrice: number;
+  variants?: ProductVariantType[];
 }
 
 export type ProductFormValues = {
   productId?: number;
   productName: string;
   productDescription: string;
-  productPrice: number;
-  productStock: number;
-  specialPrice?: number;
-  discount: number;
+  variants: ProductVariantFormValues[];
 };
+
+export interface ProductVariantFormValues {
+  variantId?: number;
+  weightLabel: string;
+  weightInGrams: number;
+  price: number;
+  discount: number;
+  stock: number;
+}
+
 export type CategoryFormValues = {
   categoryId?: number;
   categoryName: string;
@@ -93,7 +115,7 @@ export interface CartState {
 
 export type CartAction =
   | { type: "ADD_CART"; payload: CartItemType }
-  | { type: "REMOVE_CART_ITEM"; payload: { productId: number } }
+  | { type: "REMOVE_CART_ITEM"; payload: { variantId: number } }
   | {
       type: "SAVE_CART_ITEMS";
       payload: { products: CartItemType[]; totalPrice: number; cartId: number };
@@ -165,6 +187,7 @@ export interface AdminProductRow {
   productPrice: number;
   specialPrice: number;
   discount: number;
+  variants: ProductVariantType[];
 }
 
 export interface AdminCategoryRow {
@@ -199,6 +222,7 @@ export interface OrderItem {
   quantity: number;
   discount: number;
   orderedProductPrice: number;
+  weightLabel: string;
 }
 
 interface Payment {

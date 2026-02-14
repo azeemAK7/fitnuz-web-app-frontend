@@ -67,6 +67,7 @@ const ProductTable = ({
       productPrice: data.productPrice,
       specialPrice: data.specialPrice,
       discount: data.discount,
+      variants: data.variants || [],
     };
   });
 
@@ -123,6 +124,7 @@ const ProductTable = ({
       productPrice: product.productPrice,
       discount: product.discount,
       specialPrice: product.specialPrice,
+      variants: product.variants || [],
     };
     setMappedProduct(mapped);
     setProductViewOpen(true);

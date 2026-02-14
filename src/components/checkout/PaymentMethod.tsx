@@ -24,6 +24,7 @@ const PaymentMethod = () => {
       const sendCartItems = cart.map((item: CartItemType) => {
         return {
           productId: item.productId,
+          variantId: item.variantId,
           productStock: item.cartQuantity,
         };
       });

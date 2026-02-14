@@ -7,7 +7,8 @@ import {
 import { MdClose, MdDone } from "react-icons/md";
 import Status from "./Status";
 import { Divider } from "@mui/material";
-import type { ProductType } from "../../types/common";
+import type { ProductType, ProductVariantType } from "../../types/common";
+import { useState, useEffect } from "react";
 
 interface ProductViewModelProps {
   open: boolean;
@@ -22,8 +23,24 @@ function ProductViewModel({
   product,
   isAvailable,
 }: ProductViewModelProps) {
-  const { productName, image, productDescription, productPrice, specialPrice } =
+  const { productName, image, productDescription, productPrice, specialPrice, variants } =
     { ...product };
+
+  const [selectedVariant, setSelectedVariant] = useState<ProductVariantType | null>(null);
+
+  useEffect(() => {
+    if (variants && variants.length > 0) {
+      setSelectedVariant(variants[0]);
+    } else {
+      setSelectedVariant(null);
+    }
+  }, [variants]);
+
+  const displayPrice = selectedVariant ? selectedVariant.price : productPrice;
+  const displaySpecialPrice = selectedVariant ? selectedVariant.specialPrice : specialPrice;
+  const variantAvailable = selectedVariant
+    ? selectedVariant.stock > 0
+    : isAvailable;
 
   return (
     <>
@@ -57,26 +74,45 @@ function ProductViewModel({
                 >
                   {productName}
                 </DialogTitle>
-                <p className="text-sm text-gray-500 mb-1 font-mono">1kg pack</p>
+
+                {variants && variants.length > 0 ? (
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    {variants.map((v) => (
+                      <button
+                        key={v.variantId}
+                        onClick={() => setSelectedVariant(v)}
+                        className={`px-3 py-1 text-sm font-semibold rounded-full border transition-colors duration-200 ${
+                          selectedVariant?.variantId === v.variantId
+                            ? "bg-blue-500 text-white border-blue-500"
+                            : "bg-white text-gray-700 border-gray-300 hover:border-blue-400"
+                        }`}
+                      >
+                        {v.weightLabel}
+                      </button>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-sm text-gray-500 mb-1 font-mono">1kg pack</p>
+                )}
 
                 <div className="space-y-2 text-gray-700 pb-4">
                   <div className="flex items-center justify-between gap-2">
-                    {specialPrice ? (
+                    {displaySpecialPrice && displaySpecialPrice !== displayPrice ? (
                       <div className="flex gap-2 items-center">
                         <span className="text-gray-400 line-through">
-                          {Number(productPrice).toFixed(2)}
+                          {Number(displayPrice).toFixed(2)}
                         </span>
                         <span className="sm:text-xl font-semibold text-xl text-slate-700">
-                          {Number(specialPrice).toFixed(2)}
+                          {Number(displaySpecialPrice).toFixed(2)}
                         </span>
                       </div>
                     ) : (
                       <span className="font-bold text-xl text-slate-700">
                         {"  "}
-                        {Number(productPrice).toFixed(2)}
+                        {Number(displayPrice).toFixed(2)}
                       </span>
                     )}
-                    {isAvailable ? (
+                    {variantAvailable ? (
                       <Status
                         text="In Stock"
                         icon={MdDone}
