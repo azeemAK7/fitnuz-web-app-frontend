@@ -76,18 +76,21 @@ function ProductViewModel({
                 </DialogTitle>
 
                 {variants && variants.length > 0 ? (
-                  <div className="flex flex-wrap gap-2 mb-2">
+                  <div className="flex items-center gap-0 mb-2 border-b border-gray-200">
                     {variants.map((v) => (
                       <button
                         key={v.variantId}
                         onClick={() => setSelectedVariant(v)}
-                        className={`px-3 py-1 text-sm font-semibold rounded-full border transition-colors duration-200 ${
+                        className={`px-4 py-2 text-sm font-medium transition-all duration-200 relative ${
                           selectedVariant?.variantId === v.variantId
-                            ? "bg-blue-500 text-white border-blue-500"
-                            : "bg-white text-gray-700 border-gray-300 hover:border-blue-400"
+                            ? "text-slate-800 font-semibold"
+                            : "text-gray-400 hover:text-slate-600"
                         }`}
                       >
                         {v.weightLabel}
+                        {selectedVariant?.variantId === v.variantId && (
+                          <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4/5 h-[2px] bg-slate-800 rounded-full" />
+                        )}
                       </button>
                     ))}
                   </div>
